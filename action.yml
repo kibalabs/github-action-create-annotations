@@ -1,0 +1,16 @@
+name: 'Create Annotations'
+description: 'Create GitHub Checks annotations from a JSON file'
+branding:
+  icon: 'edit'
+  color: 'gray-dark'
+author: 'Kiba Labs'
+inputs:
+  github-token:
+    description: 'Token used to interact with the GitHub API.'
+    required: true
+  json-file-path:
+    description: 'Path to a JSON file which contains a list of annotations.'
+    required: true
+runs:
+  using: 'node12'
+  main: 'runnable/index.js'
