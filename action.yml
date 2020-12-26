@@ -5,10 +5,10 @@ branding:
   color: 'gray-dark'
 author: 'Kiba Labs'
 inputs:
-  repo-token:
+  github-token:
     description: 'Token used to interact with the GitHub API.'
     required: true
-  input:
+  json-file-path:
     description: 'Path to a JSON file which contains a list of annotations.'
     required: true
   ignore-unauthorized-error:

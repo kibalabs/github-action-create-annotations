@@ -1,4 +1,6 @@
+/* eslint-disable */
 const path = require('path');
+
 const FileManagerPlugin = require('filemanager-webpack-plugin');
 
 module.exports = (config) => {

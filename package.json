@@ -12,8 +12,8 @@
   "scripts": {
     "build": "build-module --webpack-config-modifier ./webpack-config-modifier.js",
     "clean": "rm -rf ./node_modules ./package-lock.json ./dist",
-    "lint": "lint",
-    "lint-fix": "lint --fix"
+    "lint": "lint --config-modifier ./eslintrc-modifier.js",
+    "lint-fix": "lint --fix --config-modifier ./eslintrc-modifier.js"
   },
   "files": [
     "dist/*"
@@ -21,7 +21,8 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "dependencies": {
-    "@actions/core": "^1.2.6"
+    "@actions/core": "^1.2.6",
+    "@actions/github": "^4.0.0"
   },
   "devDependencies": {
     "@kibalabs/build": "0.6.3-next.1",
