@@ -21,11 +21,12 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "dependencies": {
-    "@actions/core": "^1.2.6",
-    "@actions/github": "^4.0.0"
   },
+  "//": "NOTE(krishan711): all dependencies are dev because its built to include all dependencies",
   "devDependencies": {
-    "@kibalabs/build": "file:/Users/krishan/Projects/build-js/kibalabs-build-0.6.2-2.tgz",
+    "@actions/core": "^1.2.6",
+    "@actions/github": "^4.0.0",
+    "@kibalabs/build": "0.6.3-next.2",
     "filemanager-webpack-plugin": "^3.0.0",
     "js-yaml": "^3.14.0"
   }
