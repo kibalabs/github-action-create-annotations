@@ -1,0 +1,14 @@
+name: Build
+on:
+  pull_request:
+    branches: [ main ]
+jobs:
+  # TODO(krishan711): add linting
+  # TODO(krishan711): test that the dist folder is the same as what has been created here
+  run-action:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ./
+        with:
+          milliseconds: 1000
