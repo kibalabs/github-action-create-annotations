@@ -297,27 +297,6 @@ module.exports = _slicedToArray;
 
 /***/ }),
 /* 10 */
-/***/ (function(module, exports) {
-
-function _defineProperty(obj, key, value) {
-  if (key in obj) {
-    Object.defineProperty(obj, key, {
-      value: value,
-      enumerable: true,
-      configurable: true,
-      writable: true
-    });
-  } else {
-    obj[key] = value;
-  }
-
-  return obj;
-}
-
-module.exports = _defineProperty;
-
-/***/ }),
-/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -662,7 +641,7 @@ function getState(name) {
 exports.getState = getState;
 
 /***/ }),
-/* 12 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -724,6 +703,27 @@ function getOctokit(token, options) {
 }
 
 exports.getOctokit = getOctokit;
+
+/***/ }),
+/* 12 */
+/***/ (function(module, exports) {
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
+module.exports = _defineProperty;
 
 /***/ }),
 /* 13 */
@@ -3886,7 +3886,7 @@ function wrappy(fn, cb) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "restEndpointMethods", function() { return restEndpointMethods; });
-/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(10);
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(12);
 /* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(9);
 /* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1__);
@@ -5055,7 +5055,7 @@ restEndpointMethods.VERSION = VERSION;
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "composePaginateRest", function() { return composePaginateRest; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "paginateRest", function() { return paginateRest; });
-/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(10);
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(12);
 /* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(0);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1__);
@@ -5285,7 +5285,7 @@ var slicedToArray = __webpack_require__(9);
 var slicedToArray_default = /*#__PURE__*/__webpack_require__.n(slicedToArray);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/defineProperty.js
-var defineProperty = __webpack_require__(10);
+var defineProperty = __webpack_require__(12);
 var defineProperty_default = /*#__PURE__*/__webpack_require__.n(defineProperty);
 
 // CONCATENATED MODULE: ./node_modules/@octokit/endpoint/node_modules/is-plain-object/dist/is-plain-object.mjs
@@ -8114,7 +8114,7 @@ var regenerator = __webpack_require__(0);
 var regenerator_default = /*#__PURE__*/__webpack_require__.n(regenerator);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/defineProperty.js
-var defineProperty = __webpack_require__(10);
+var defineProperty = __webpack_require__(12);
 var defineProperty_default = /*#__PURE__*/__webpack_require__.n(defineProperty);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/asyncToGenerator.js
@@ -8125,10 +8125,10 @@ var asyncToGenerator_default = /*#__PURE__*/__webpack_require__.n(asyncToGenerat
 var external_fs_ = __webpack_require__(18);
 
 // EXTERNAL MODULE: ./node_modules/@actions/core/lib/core.js
-var core = __webpack_require__(11);
+var core = __webpack_require__(10);
 
 // EXTERNAL MODULE: ./node_modules/@actions/github/lib/github.js
-var github = __webpack_require__(12);
+var github = __webpack_require__(11);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/classCallCheck.js
 var classCallCheck = __webpack_require__(2);
@@ -8348,7 +8348,7 @@ function run() {
 
 function _run() {
   _run = asyncToGenerator_default()( /*#__PURE__*/regenerator_default.a.mark(function _callee() {
-    var githubToken, jsonFilePath, fileContent, annotations, octokit, pullRequest, ref, checkRunId, failureCount, warningCount, noticeCount, summary, conclusion, chunkSize, index, annotationsBatch;
+    var githubToken, jsonFilePath, fileContent, annotations, octokit, pullRequest, ref, output, failureCount, warningCount, noticeCount, summary, conclusion, checkRunId, chunkSize, index, annotationsBatch;
     return regenerator_default.a.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
@@ -8375,8 +8375,16 @@ function _run() {
               ref = github["context"].sha;
             }
 
-            checkRunId = github["context"].runId; // const checkRunId = await createCheck(octokit, githubContext.repo.owner, githubContext.repo.repo, title, ref);
+            _context.next = 12;
+            return octokit.checks.listForRef({
+              owner: github["context"].repo.owner,
+              repo: github["context"].repo.repo,
+              ref: ref
+            });
 
+          case 12:
+            output = _context.sent;
+            Object(core["info"])("output: ".concat(JSON.stringify(output)));
             failureCount = annotations.filter(function (annotation) {
               return annotation.annotation_level === ANNOTATION_LEVEL_FAILURE;
             }).length;
@@ -8386,15 +8394,18 @@ function _run() {
             noticeCount = annotations.filter(function (annotation) {
               return annotation.annotation_level === ANNOTATION_LEVEL_NOTICE;
             }).length;
-            Object(core["info"])("Reporting ".concat(failureCount, " failures, ").concat(warningCount, " warnings and ").concat(noticeCount, " notices"));
             summary = generateSummary(failureCount, warningCount, noticeCount);
             conclusion = generateConclusion(failureCount, warningCount, noticeCount);
+            Object(core["info"])("Summary: ".concat(summary));
+            Object(core["info"])("Conclusion: ".concat(conclusion));
+            checkRunId = github["context"].runId; // const checkRunId = await createCheck(octokit, githubContext.repo.owner, githubContext.repo.repo, title, ref);
+
             chunkSize = 50;
             index = 0;
 
-          case 19:
+          case 24:
             if (!(index < annotations.length)) {
-              _context.next = 26;
+              _context.next = 31;
               break;
             }
 
@@ -8403,29 +8414,29 @@ function _run() {
                 end_line: annotation.end_line || annotation.start_line
               });
             });
-            _context.next = 23;
+            _context.next = 28;
             return updateCheck(octokit, github["context"].repo.owner, github["context"].repo.repo, checkRunId, conclusion, github["context"].job, summary, annotationsBatch);
 
-          case 23:
-            index += chunkSize;
-            _context.next = 19;
-            break;
-
-          case 26:
-            _context.next = 31;
-            break;
-
           case 28:
-            _context.prev = 28;
+            index += chunkSize;
+            _context.next = 24;
+            break;
+
+          case 31:
+            _context.next = 36;
+            break;
+
+          case 33:
+            _context.prev = 33;
             _context.t0 = _context["catch"](0);
             Object(core["setFailed"])(_context.t0.message);
 
-          case 31:
+          case 36:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, null, [[0, 28]]);
+    }, _callee, null, [[0, 33]]);
   }));
   return _run.apply(this, arguments);
 }

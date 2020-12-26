@@ -45,15 +45,19 @@ async function run(): Promise<void> {
       ref = githubContext.sha;
     }
 
-    const checkRunId = githubContext.runId;
-    // const checkRunId = await createCheck(octokit, githubContext.repo.owner, githubContext.repo.repo, title, ref);
+    const output = await octokit.checks.listForRef({owner: githubContext.repo.owner, repo: githubContext.repo.repo, ref: ref});
+    logInfo(`output: ${JSON.stringify(output)}`);
+
     const failureCount = annotations.filter((annotation: IAnnotation): boolean => annotation.annotation_level === ANNOTATION_LEVEL_FAILURE).length;
     const warningCount = annotations.filter((annotation: IAnnotation): boolean => annotation.annotation_level === ANNOTATION_LEVEL_WARNING).length;
     const noticeCount = annotations.filter((annotation: IAnnotation): boolean => annotation.annotation_level === ANNOTATION_LEVEL_NOTICE).length;
-    logInfo(`Reporting ${failureCount} failures, ${warningCount} warnings and ${noticeCount} notices`);
-
     const summary = generateSummary(failureCount, warningCount, noticeCount);
     const conclusion = generateConclusion(failureCount, warningCount, noticeCount);
+    logInfo(`Summary: ${summary}`);
+    logInfo(`Conclusion: ${conclusion}`);
+
+    const checkRunId = githubContext.runId;
+    // const checkRunId = await createCheck(octokit, githubContext.repo.owner, githubContext.repo.repo, title, ref);
     const chunkSize = 50;
     for (var index = 0; index < annotations.length; index += chunkSize) {
       const annotationsBatch = annotations.slice(index, index + chunkSize).map((annotation: IAnnotation): IAnnotation => {
