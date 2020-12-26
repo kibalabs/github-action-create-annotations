@@ -2,7 +2,7 @@ import { promises as fs } from 'fs';
 
 import { getInput, info as logInfo, setFailed } from '@actions/core';
 import { getOctokit, context as githubContext } from '@actions/github';
-import { createCheck, listChecks, updateCheck } from './github-checks';
+import { createCheck, ICheck, listChecks, updateCheck } from './github-checks';
 import { ANNOTATION_LEVEL_FAILURE, ANNOTATION_LEVEL_NOTICE, ANNOTATION_LEVEL_WARNING, IAnnotation } from './model';
 
 const generateSummary = function (failureCount: number, warningCount: number, noticeCount: number): string {
@@ -45,9 +45,6 @@ async function run(): Promise<void> {
       ref = githubContext.sha;
     }
 
-    const checks = await listChecks(octokit, githubContext.repo.owner, githubContext.repo.repo, ref);
-    logInfo(`output: ${JSON.stringify(checks)}`);
-
     const failureCount = annotations.filter((annotation: IAnnotation): boolean => annotation.annotation_level === ANNOTATION_LEVEL_FAILURE).length;
     const warningCount = annotations.filter((annotation: IAnnotation): boolean => annotation.annotation_level === ANNOTATION_LEVEL_WARNING).length;
     const noticeCount = annotations.filter((annotation: IAnnotation): boolean => annotation.annotation_level === ANNOTATION_LEVEL_NOTICE).length;
@@ -56,8 +53,13 @@ async function run(): Promise<void> {
     logInfo(`Summary: ${summary}`);
     logInfo(`Conclusion: ${conclusion}`);
 
-    const checkRunId = githubContext.runId;
-    // const checkRunId = await createCheck(octokit, githubContext.repo.owner, githubContext.repo.repo, title, ref);
+    const currentChecks = await listChecks(octokit, githubContext.repo.owner, githubContext.repo.repo, ref);
+    var currentCheck = currentChecks.find((currentCheck: ICheck): boolean => currentCheck.name === githubContext.job);
+    logInfo(`currentCheck: ${JSON.stringify(currentCheck)}`);
+    if (!currentCheck) {
+      currentCheck = await createCheck(octokit, githubContext.repo.owner, githubContext.repo.repo, title, ref);
+    }
+
     const chunkSize = 50;
     for (var index = 0; index < annotations.length; index += chunkSize) {
       const annotationsBatch = annotations.slice(index, index + chunkSize).map((annotation: IAnnotation): IAnnotation => {
@@ -66,7 +68,7 @@ async function run(): Promise<void> {
           end_line: annotation.end_line || annotation.start_line,
         };
       });
-      await updateCheck(octokit, githubContext.repo.owner, githubContext.repo.repo, checkRunId, conclusion, githubContext.job, summary, annotationsBatch);
+      await updateCheck(octokit, githubContext.repo.owner, githubContext.repo.repo, currentCheck.id, conclusion, currentCheck.name, summary, annotationsBatch);
     }
   } catch (error) {
     setFailed(error.message);
