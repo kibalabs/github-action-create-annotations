@@ -98,7 +98,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(29);
+module.exports = __webpack_require__(28);
 
 
 /***/ }),
@@ -128,26 +128,6 @@ module.exports = _classCallCheck;
 
 /***/ }),
 /* 3 */
-/***/ (function(module, exports) {
-
-module.exports = require("stream");
-
-/***/ }),
-/* 4 */
-/***/ (function(module, exports) {
-
-function _assertThisInitialized(self) {
-  if (self === void 0) {
-    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-  }
-
-  return self;
-}
-
-module.exports = _assertThisInitialized;
-
-/***/ }),
-/* 5 */
 /***/ (function(module, exports) {
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
@@ -189,7 +169,7 @@ function _asyncToGenerator(fn) {
 module.exports = _asyncToGenerator;
 
 /***/ }),
-/* 6 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var setPrototypeOf = __webpack_require__(22);
@@ -212,12 +192,76 @@ function _inherits(subClass, superClass) {
 module.exports = _inherits;
 
 /***/ }),
-/* 7 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var _typeof = __webpack_require__(10);
+"use strict";
 
-var assertThisInitialized = __webpack_require__(4);
+
+var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  Object.defineProperty(o, k2, {
+    enumerable: true,
+    get: function get() {
+      return m[k];
+    }
+  });
+} : function (o, m, k, k2) {
+  if (k2 === undefined) k2 = k;
+  o[k2] = m[k];
+});
+
+var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
+  Object.defineProperty(o, "default", {
+    enumerable: true,
+    value: v
+  });
+} : function (o, v) {
+  o["default"] = v;
+});
+
+var __importStar = this && this.__importStar || function (mod) {
+  if (mod && mod.__esModule) return mod;
+  var result = {};
+  if (mod != null) for (var k in mod) {
+    if (Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+  }
+
+  __setModuleDefault(result, mod);
+
+  return result;
+};
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.getOctokit = exports.context = void 0;
+
+var Context = __importStar(__webpack_require__(23));
+
+var utils_1 = __webpack_require__(38);
+
+exports.context = new Context.Context();
+/**
+ * Returns a hydrated octokit ready to use for GitHub Actions
+ *
+ * @param     token    the repo PAT or GITHUB_TOKEN
+ * @param     options  other options to set
+ */
+
+function getOctokit(token, options) {
+  return new utils_1.GitHub(utils_1.getOctokitOptions(token, options));
+}
+
+exports.getOctokit = getOctokit;
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var _typeof = __webpack_require__(14);
+
+var assertThisInitialized = __webpack_require__(8);
 
 function _possibleConstructorReturn(self, call) {
   if (call && (_typeof(call) === "object" || typeof call === "function")) {
@@ -230,62 +274,36 @@ function _possibleConstructorReturn(self, call) {
 module.exports = _possibleConstructorReturn;
 
 /***/ }),
+/* 7 */
+/***/ (function(module, exports) {
+
+module.exports = require("stream");
+
+/***/ }),
 /* 8 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-var arrayWithHoles = __webpack_require__(34);
+function _assertThisInitialized(self) {
+  if (self === void 0) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }
 
-var iterableToArrayLimit = __webpack_require__(35);
-
-var unsupportedIterableToArray = __webpack_require__(36);
-
-var nonIterableRest = __webpack_require__(38);
-
-function _slicedToArray(arr, i) {
-  return arrayWithHoles(arr) || iterableToArrayLimit(arr, i) || unsupportedIterableToArray(arr, i) || nonIterableRest();
+  return self;
 }
 
-module.exports = _slicedToArray;
+module.exports = _assertThisInitialized;
 
 /***/ }),
 /* 9 */
-/***/ (function(module, exports) {
-
-module.exports = require("zlib");
-
-/***/ }),
-/* 10 */
-/***/ (function(module, exports) {
-
-function _typeof(obj) {
-  "@babel/helpers - typeof";
-
-  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-    module.exports = _typeof = function _typeof(obj) {
-      return typeof obj;
-    };
-  } else {
-    module.exports = _typeof = function _typeof(obj) {
-      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-    };
-  }
-
-  return _typeof(obj);
-}
-
-module.exports = _typeof;
-
-/***/ }),
-/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var getPrototypeOf = __webpack_require__(1);
 
 var setPrototypeOf = __webpack_require__(22);
 
-var isNativeFunction = __webpack_require__(42);
+var isNativeFunction = __webpack_require__(41);
 
-var construct = __webpack_require__(43);
+var construct = __webpack_require__(42);
 
 function _wrapNativeSuper(Class) {
   var _cache = typeof Map === "function" ? new Map() : undefined;
@@ -324,56 +342,25 @@ function _wrapNativeSuper(Class) {
 module.exports = _wrapNativeSuper;
 
 /***/ }),
-/* 12 */
-/***/ (function(module, exports) {
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
 
-function _defineProperty(obj, key, value) {
-  if (key in obj) {
-    Object.defineProperty(obj, key, {
-      value: value,
-      enumerable: true,
-      configurable: true,
-      writable: true
-    });
-  } else {
-    obj[key] = value;
-  }
+var arrayWithHoles = __webpack_require__(33);
 
-  return obj;
+var iterableToArrayLimit = __webpack_require__(34);
+
+var unsupportedIterableToArray = __webpack_require__(35);
+
+var nonIterableRest = __webpack_require__(37);
+
+function _slicedToArray(arr, i) {
+  return arrayWithHoles(arr) || iterableToArrayLimit(arr, i) || unsupportedIterableToArray(arr, i) || nonIterableRest();
 }
 
-module.exports = _defineProperty;
+module.exports = _slicedToArray;
 
 /***/ }),
-/* 13 */
-/***/ (function(module, exports) {
-
-function _defineProperties(target, props) {
-  for (var i = 0; i < props.length; i++) {
-    var descriptor = props[i];
-    descriptor.enumerable = descriptor.enumerable || false;
-    descriptor.configurable = true;
-    if ("value" in descriptor) descriptor.writable = true;
-    Object.defineProperty(target, descriptor.key, descriptor);
-  }
-}
-
-function _createClass(Constructor, protoProps, staticProps) {
-  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
-  if (staticProps) _defineProperties(Constructor, staticProps);
-  return Constructor;
-}
-
-module.exports = _createClass;
-
-/***/ }),
-/* 14 */
-/***/ (function(module, exports) {
-
-module.exports = require("http");
-
-/***/ }),
-/* 15 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -427,15 +414,15 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var command_1 = __webpack_require__(31);
+var command_1 = __webpack_require__(30);
 
-var file_command_1 = __webpack_require__(32);
+var file_command_1 = __webpack_require__(31);
 
 var utils_1 = __webpack_require__(21);
 
-var os = __importStar(__webpack_require__(16));
+var os = __importStar(__webpack_require__(17));
 
-var path = __importStar(__webpack_require__(33));
+var path = __importStar(__webpack_require__(32));
 /**
  * The code to exit an action
  */
@@ -718,86 +705,99 @@ function getState(name) {
 exports.getState = getState;
 
 /***/ }),
+/* 12 */
+/***/ (function(module, exports) {
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
+module.exports = _defineProperty;
+
+/***/ }),
+/* 13 */
+/***/ (function(module, exports) {
+
+module.exports = require("zlib");
+
+/***/ }),
+/* 14 */
+/***/ (function(module, exports) {
+
+function _typeof(obj) {
+  "@babel/helpers - typeof";
+
+  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+    module.exports = _typeof = function _typeof(obj) {
+      return typeof obj;
+    };
+  } else {
+    module.exports = _typeof = function _typeof(obj) {
+      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+    };
+  }
+
+  return _typeof(obj);
+}
+
+module.exports = _typeof;
+
+/***/ }),
+/* 15 */
+/***/ (function(module, exports) {
+
+function _defineProperties(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor) descriptor.writable = true;
+    Object.defineProperty(target, descriptor.key, descriptor);
+  }
+}
+
+function _createClass(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties(Constructor, staticProps);
+  return Constructor;
+}
+
+module.exports = _createClass;
+
+/***/ }),
 /* 16 */
 /***/ (function(module, exports) {
 
-module.exports = require("os");
+module.exports = require("http");
 
 /***/ }),
 /* 17 */
 /***/ (function(module, exports) {
 
-module.exports = require("fs");
+module.exports = require("os");
 
 /***/ }),
 /* 18 */
 /***/ (function(module, exports) {
 
-module.exports = require("https");
+module.exports = require("fs");
 
 /***/ }),
 /* 19 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-
-
-var __createBinding = this && this.__createBinding || (Object.create ? function (o, m, k, k2) {
-  if (k2 === undefined) k2 = k;
-  Object.defineProperty(o, k2, {
-    enumerable: true,
-    get: function get() {
-      return m[k];
-    }
-  });
-} : function (o, m, k, k2) {
-  if (k2 === undefined) k2 = k;
-  o[k2] = m[k];
-});
-
-var __setModuleDefault = this && this.__setModuleDefault || (Object.create ? function (o, v) {
-  Object.defineProperty(o, "default", {
-    enumerable: true,
-    value: v
-  });
-} : function (o, v) {
-  o["default"] = v;
-});
-
-var __importStar = this && this.__importStar || function (mod) {
-  if (mod && mod.__esModule) return mod;
-  var result = {};
-  if (mod != null) for (var k in mod) {
-    if (Object.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-  }
-
-  __setModuleDefault(result, mod);
-
-  return result;
-};
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.getOctokit = exports.context = void 0;
-
-var Context = __importStar(__webpack_require__(23));
-
-var utils_1 = __webpack_require__(39);
-
-exports.context = new Context.Context();
-/**
- * Returns a hydrated octokit ready to use for GitHub Actions
- *
- * @param     token    the repo PAT or GITHUB_TOKEN
- * @param     options  other options to set
- */
-
-function getOctokit(token, options) {
-  return new utils_1.GitHub(utils_1.getOctokitOptions(token, options));
-}
-
-exports.getOctokit = getOctokit;
+module.exports = require("https");
 
 /***/ }),
 /* 20 */
@@ -856,20 +856,20 @@ module.exports = _setPrototypeOf;
 "use strict";
 
 
-var _slicedToArray = __webpack_require__(8);
+var _slicedToArray = __webpack_require__(10);
 
 var _classCallCheck = __webpack_require__(2);
 
-var _createClass = __webpack_require__(13);
+var _createClass = __webpack_require__(15);
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.Context = void 0;
 
-var fs_1 = __webpack_require__(17);
+var fs_1 = __webpack_require__(18);
 
-var os_1 = __webpack_require__(16);
+var os_1 = __webpack_require__(17);
 
 var Context = /*#__PURE__*/function () {
   /**
@@ -945,7 +945,7 @@ exports.Context = Context;
 /* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var objectWithoutPropertiesLoose = __webpack_require__(53);
+var objectWithoutPropertiesLoose = __webpack_require__(52);
 
 function _objectWithoutProperties(source, excluded) {
   if (source == null) return {};
@@ -972,11 +972,11 @@ module.exports = _objectWithoutProperties;
 /* 25 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var register = __webpack_require__(54);
+var register = __webpack_require__(53);
 
-var addHook = __webpack_require__(55);
+var addHook = __webpack_require__(54);
 
-var removeHook = __webpack_require__(56); // bind with array of arguments: https://stackoverflow.com/a/21792913
+var removeHook = __webpack_require__(55); // bind with array of arguments: https://stackoverflow.com/a/21792913
 
 
 var bind = Function.bind;
@@ -1036,7 +1036,7 @@ module.exports.Collection = Hook.Collection;
 /* 26 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var wrappy = __webpack_require__(57);
+var wrappy = __webpack_require__(56);
 
 module.exports = wrappy(once);
 module.exports.strict = wrappy(onceStrict);
@@ -1083,92 +1083,14 @@ function onceStrict(fn) {
 /* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(28);
+module.exports = __webpack_require__(60);
 
 
 /***/ }),
 /* 28 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(0);
-/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(5);
-/* harmony import */ var _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(17);
-/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(fs__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _actions_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(15);
-/* harmony import */ var _actions_core__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_actions_core__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _actions_github__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(19);
-/* harmony import */ var _actions_github__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_actions_github__WEBPACK_IMPORTED_MODULE_4__);
-
-
-
-
-
-
-function run() {
-  return _run.apply(this, arguments);
-}
-
-function _run() {
-  _run = _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default()( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-    var githubToken, jsonFilePath, fileContent, annotations, octokit, pullRequest, ref;
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-      while (1) {
-        switch (_context.prev = _context.next) {
-          case 0:
-            _context.prev = 0;
-            githubToken = Object(_actions_core__WEBPACK_IMPORTED_MODULE_3__["getInput"])('github-token', {
-              required: true
-            });
-            jsonFilePath = Object(_actions_core__WEBPACK_IMPORTED_MODULE_3__["getInput"])('json-file-path', {
-              required: true
-            });
-            _context.next = 5;
-            return fs__WEBPACK_IMPORTED_MODULE_2__["promises"].readFile(jsonFilePath, 'utf8');
-
-          case 5:
-            fileContent = _context.sent;
-            annotations = JSON.parse(fileContent);
-            octokit = Object(_actions_github__WEBPACK_IMPORTED_MODULE_4__["getOctokit"])(githubToken);
-            pullRequest = _actions_github__WEBPACK_IMPORTED_MODULE_4__["context"].payload.pull_request;
-
-            if (pullRequest) {
-              ref = pullRequest.head.sha;
-            } else {
-              ref = _actions_github__WEBPACK_IMPORTED_MODULE_4__["context"].sha;
-            } // const owner = githubContext.repo.owner;
-            // const repo = githubContext.repo.repo;
-
-
-            Object(_actions_core__WEBPACK_IMPORTED_MODULE_3__["info"])("here: ".concat(jsonFilePath, " ").concat(ref, " ").concat(JSON.stringify(annotations), " ").concat(octokit));
-            _context.next = 16;
-            break;
-
-          case 13:
-            _context.prev = 13;
-            _context.t0 = _context["catch"](0);
-            Object(_actions_core__WEBPACK_IMPORTED_MODULE_3__["setFailed"])(_context.t0.message);
-
-          case 16:
-          case "end":
-            return _context.stop();
-        }
-      }
-    }, _callee, null, [[0, 13]]);
-  }));
-  return _run.apply(this, arguments);
-}
-
-run();
-
-/***/ }),
-/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
-/* WEBPACK VAR INJECTION */(function(module) {var _typeof = __webpack_require__(10);
+/* WEBPACK VAR INJECTION */(function(module) {var _typeof = __webpack_require__(14);
 
 /**
  * Copyright (c) 2014-present, Facebook, Inc.
@@ -1892,10 +1814,10 @@ try {
   // problems, please detail your unique predicament in a GitHub issue.
   Function("r", "regeneratorRuntime = r")(runtime);
 }
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(30)(module)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(29)(module)))
 
 /***/ }),
-/* 30 */
+/* 29 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -1923,7 +1845,7 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 31 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1931,7 +1853,7 @@ module.exports = function(module) {
 
 var _classCallCheck = __webpack_require__(2);
 
-var _createClass = __webpack_require__(13);
+var _createClass = __webpack_require__(15);
 
 var __importStar = this && this.__importStar || function (mod) {
   if (mod && mod.__esModule) return mod;
@@ -1947,7 +1869,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var os = __importStar(__webpack_require__(16));
+var os = __importStar(__webpack_require__(17));
 
 var utils_1 = __webpack_require__(21);
 /**
@@ -2033,7 +1955,7 @@ function escapeProperty(s) {
 }
 
 /***/ }),
-/* 32 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2055,9 +1977,9 @@ Object.defineProperty(exports, "__esModule", {
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-var fs = __importStar(__webpack_require__(17));
+var fs = __importStar(__webpack_require__(18));
 
-var os = __importStar(__webpack_require__(16));
+var os = __importStar(__webpack_require__(17));
 
 var utils_1 = __webpack_require__(21);
 
@@ -2080,13 +2002,13 @@ function issueCommand(command, message) {
 exports.issueCommand = issueCommand;
 
 /***/ }),
-/* 33 */
+/* 32 */
 /***/ (function(module, exports) {
 
 module.exports = require("path");
 
 /***/ }),
-/* 34 */
+/* 33 */
 /***/ (function(module, exports) {
 
 function _arrayWithHoles(arr) {
@@ -2096,7 +2018,7 @@ function _arrayWithHoles(arr) {
 module.exports = _arrayWithHoles;
 
 /***/ }),
-/* 35 */
+/* 34 */
 /***/ (function(module, exports) {
 
 function _iterableToArrayLimit(arr, i) {
@@ -2129,10 +2051,10 @@ function _iterableToArrayLimit(arr, i) {
 module.exports = _iterableToArrayLimit;
 
 /***/ }),
-/* 36 */
+/* 35 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var arrayLikeToArray = __webpack_require__(37);
+var arrayLikeToArray = __webpack_require__(36);
 
 function _unsupportedIterableToArray(o, minLen) {
   if (!o) return;
@@ -2146,7 +2068,7 @@ function _unsupportedIterableToArray(o, minLen) {
 module.exports = _unsupportedIterableToArray;
 
 /***/ }),
-/* 37 */
+/* 36 */
 /***/ (function(module, exports) {
 
 function _arrayLikeToArray(arr, len) {
@@ -2162,7 +2084,7 @@ function _arrayLikeToArray(arr, len) {
 module.exports = _arrayLikeToArray;
 
 /***/ }),
-/* 38 */
+/* 37 */
 /***/ (function(module, exports) {
 
 function _nonIterableRest() {
@@ -2172,7 +2094,7 @@ function _nonIterableRest() {
 module.exports = _nonIterableRest;
 
 /***/ }),
-/* 39 */
+/* 38 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2219,14 +2141,14 @@ exports.getOctokitOptions = exports.GitHub = exports.context = void 0;
 
 var Context = __importStar(__webpack_require__(23));
 
-var Utils = __importStar(__webpack_require__(40)); // octokit + plugins
+var Utils = __importStar(__webpack_require__(39)); // octokit + plugins
 
 
-var core_1 = __webpack_require__(60);
+var core_1 = __webpack_require__(59);
 
-var plugin_rest_endpoint_methods_1 = __webpack_require__(58);
+var plugin_rest_endpoint_methods_1 = __webpack_require__(57);
 
-var plugin_paginate_rest_1 = __webpack_require__(59);
+var plugin_paginate_rest_1 = __webpack_require__(58);
 
 exports.context = new Context.Context();
 var baseUrl = Utils.getApiBaseUrl();
@@ -2260,7 +2182,7 @@ function getOctokitOptions(token, options) {
 exports.getOctokitOptions = getOctokitOptions;
 
 /***/ }),
-/* 40 */
+/* 39 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2305,7 +2227,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.getApiBaseUrl = exports.getProxyAgent = exports.getAuthString = void 0;
 
-var httpClient = __importStar(__webpack_require__(41));
+var httpClient = __importStar(__webpack_require__(40));
 
 function getAuthString(token, options) {
   if (!token && !options.auth) {
@@ -2333,7 +2255,7 @@ function getApiBaseUrl() {
 exports.getApiBaseUrl = getApiBaseUrl;
 
 /***/ }),
-/* 41 */
+/* 40 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2341,21 +2263,21 @@ exports.getApiBaseUrl = getApiBaseUrl;
 
 var _regeneratorRuntime = __webpack_require__(0);
 
-var _asyncToGenerator = __webpack_require__(5);
+var _asyncToGenerator = __webpack_require__(3);
 
-var _createClass = __webpack_require__(13);
+var _createClass = __webpack_require__(15);
 
 var _classCallCheck = __webpack_require__(2);
 
-var _assertThisInitialized = __webpack_require__(4);
+var _assertThisInitialized = __webpack_require__(8);
 
-var _inherits = __webpack_require__(6);
+var _inherits = __webpack_require__(4);
 
-var _possibleConstructorReturn = __webpack_require__(7);
+var _possibleConstructorReturn = __webpack_require__(6);
 
 var _getPrototypeOf = __webpack_require__(1);
 
-var _wrapNativeSuper = __webpack_require__(11);
+var _wrapNativeSuper = __webpack_require__(9);
 
 function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
@@ -2365,11 +2287,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var http = __webpack_require__(14);
+var http = __webpack_require__(16);
 
-var https = __webpack_require__(18);
+var https = __webpack_require__(19);
 
-var pm = __webpack_require__(45);
+var pm = __webpack_require__(44);
 
 var tunnel;
 var HttpCodes;
@@ -3126,7 +3048,7 @@ var HttpClient = /*#__PURE__*/function () {
       if (useProxy) {
         // If using proxy, need tunnel
         if (!tunnel) {
-          tunnel = __webpack_require__(46);
+          tunnel = __webpack_require__(45);
         }
 
         var agentOptions = {
@@ -3307,7 +3229,7 @@ var HttpClient = /*#__PURE__*/function () {
 exports.HttpClient = HttpClient;
 
 /***/ }),
-/* 42 */
+/* 41 */
 /***/ (function(module, exports) {
 
 function _isNativeFunction(fn) {
@@ -3317,12 +3239,12 @@ function _isNativeFunction(fn) {
 module.exports = _isNativeFunction;
 
 /***/ }),
-/* 43 */
+/* 42 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var setPrototypeOf = __webpack_require__(22);
 
-var isNativeReflectConstruct = __webpack_require__(44);
+var isNativeReflectConstruct = __webpack_require__(43);
 
 function _construct(Parent, args, Class) {
   if (isNativeReflectConstruct()) {
@@ -3344,7 +3266,7 @@ function _construct(Parent, args, Class) {
 module.exports = _construct;
 
 /***/ }),
-/* 44 */
+/* 43 */
 /***/ (function(module, exports) {
 
 function _isNativeReflectConstruct() {
@@ -3363,13 +3285,13 @@ function _isNativeReflectConstruct() {
 module.exports = _isNativeReflectConstruct;
 
 /***/ }),
-/* 45 */
+/* 44 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _typeof = __webpack_require__(10);
+var _typeof = __webpack_require__(14);
 
 function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 
@@ -3473,33 +3395,33 @@ function checkBypass(reqUrl) {
 exports.checkBypass = checkBypass;
 
 /***/ }),
-/* 46 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(47);
+module.exports = __webpack_require__(46);
 
 /***/ }),
-/* 47 */
+/* 46 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _typeof = __webpack_require__(10);
+var _typeof = __webpack_require__(14);
 
-var net = __webpack_require__(48);
+var net = __webpack_require__(47);
 
-var tls = __webpack_require__(49);
+var tls = __webpack_require__(48);
 
-var http = __webpack_require__(14);
+var http = __webpack_require__(16);
 
-var https = __webpack_require__(18);
+var https = __webpack_require__(19);
 
-var events = __webpack_require__(50);
+var events = __webpack_require__(49);
 
-var assert = __webpack_require__(51);
+var assert = __webpack_require__(50);
 
-var util = __webpack_require__(52);
+var util = __webpack_require__(51);
 
 exports.httpOverHttp = httpOverHttp;
 exports.httpsOverHttp = httpsOverHttp;
@@ -3769,37 +3691,37 @@ if (process.env.NODE_DEBUG && /\btunnel\b/.test(process.env.NODE_DEBUG)) {
 exports.debug = debug; // for test
 
 /***/ }),
-/* 48 */
+/* 47 */
 /***/ (function(module, exports) {
 
 module.exports = require("net");
 
 /***/ }),
-/* 49 */
+/* 48 */
 /***/ (function(module, exports) {
 
 module.exports = require("tls");
 
 /***/ }),
-/* 50 */
+/* 49 */
 /***/ (function(module, exports) {
 
 module.exports = require("events");
 
 /***/ }),
-/* 51 */
+/* 50 */
 /***/ (function(module, exports) {
 
 module.exports = require("assert");
 
 /***/ }),
-/* 52 */
+/* 51 */
 /***/ (function(module, exports) {
 
 module.exports = require("util");
 
 /***/ }),
-/* 53 */
+/* 52 */
 /***/ (function(module, exports) {
 
 function _objectWithoutPropertiesLoose(source, excluded) {
@@ -3820,7 +3742,7 @@ function _objectWithoutPropertiesLoose(source, excluded) {
 module.exports = _objectWithoutPropertiesLoose;
 
 /***/ }),
-/* 54 */
+/* 53 */
 /***/ (function(module, exports) {
 
 module.exports = register;
@@ -3852,7 +3774,7 @@ function register(state, name, method, options) {
 }
 
 /***/ }),
-/* 55 */
+/* 54 */
 /***/ (function(module, exports) {
 
 module.exports = addHook;
@@ -3897,7 +3819,7 @@ function addHook(state, kind, name, hook) {
 }
 
 /***/ }),
-/* 56 */
+/* 55 */
 /***/ (function(module, exports) {
 
 module.exports = removeHook;
@@ -3919,7 +3841,7 @@ function removeHook(state, name, method) {
 }
 
 /***/ }),
-/* 57 */
+/* 56 */
 /***/ (function(module, exports) {
 
 // Returns a wrapper function that returns a wrapped callback
@@ -3958,7 +3880,7 @@ function wrappy(fn, cb) {
 }
 
 /***/ }),
-/* 58 */
+/* 57 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3966,7 +3888,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "restEndpointMethods", function() { return restEndpointMethods; });
 /* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(12);
 /* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(8);
+/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(10);
 /* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1__);
 
 
@@ -5126,7 +5048,7 @@ restEndpointMethods.VERSION = VERSION;
 
 
 /***/ }),
-/* 59 */
+/* 58 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5137,7 +5059,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(0);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(5);
+/* harmony import */ var _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(3);
 /* harmony import */ var _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__);
 
 
@@ -5293,7 +5215,7 @@ paginateRest.VERSION = VERSION;
 
 
 /***/ }),
-/* 60 */
+/* 59 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5304,11 +5226,11 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.d(__webpack_exports__, "Octokit", function() { return /* binding */ dist_web_Octokit; });
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/inherits.js
-var inherits = __webpack_require__(6);
+var inherits = __webpack_require__(4);
 var inherits_default = /*#__PURE__*/__webpack_require__.n(inherits);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js
-var possibleConstructorReturn = __webpack_require__(7);
+var possibleConstructorReturn = __webpack_require__(6);
 var possibleConstructorReturn_default = /*#__PURE__*/__webpack_require__.n(possibleConstructorReturn);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/getPrototypeOf.js
@@ -5324,7 +5246,7 @@ var regenerator = __webpack_require__(0);
 var regenerator_default = /*#__PURE__*/__webpack_require__.n(regenerator);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/asyncToGenerator.js
-var asyncToGenerator = __webpack_require__(5);
+var asyncToGenerator = __webpack_require__(3);
 var asyncToGenerator_default = /*#__PURE__*/__webpack_require__.n(asyncToGenerator);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/classCallCheck.js
@@ -5332,11 +5254,11 @@ var classCallCheck = __webpack_require__(2);
 var classCallCheck_default = /*#__PURE__*/__webpack_require__.n(classCallCheck);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/createClass.js
-var createClass = __webpack_require__(13);
+var createClass = __webpack_require__(15);
 var createClass_default = /*#__PURE__*/__webpack_require__.n(createClass);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/typeof.js
-var helpers_typeof = __webpack_require__(10);
+var helpers_typeof = __webpack_require__(14);
 var typeof_default = /*#__PURE__*/__webpack_require__.n(helpers_typeof);
 
 // CONCATENATED MODULE: ./node_modules/universal-user-agent/dist-web/index.js
@@ -5359,7 +5281,7 @@ function getUserAgent() {
 var before_after_hook = __webpack_require__(25);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/slicedToArray.js
-var slicedToArray = __webpack_require__(8);
+var slicedToArray = __webpack_require__(10);
 var slicedToArray_default = /*#__PURE__*/__webpack_require__.n(slicedToArray);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/defineProperty.js
@@ -5836,19 +5758,19 @@ function is_plain_object_isPlainObject(o) {
 
 
 // EXTERNAL MODULE: external "stream"
-var external_stream_ = __webpack_require__(3);
+var external_stream_ = __webpack_require__(7);
 
 // EXTERNAL MODULE: external "http"
-var external_http_ = __webpack_require__(14);
+var external_http_ = __webpack_require__(16);
 
 // EXTERNAL MODULE: external "url"
 var external_url_ = __webpack_require__(20);
 
 // EXTERNAL MODULE: external "https"
-var external_https_ = __webpack_require__(18);
+var external_https_ = __webpack_require__(19);
 
 // EXTERNAL MODULE: external "zlib"
-var external_zlib_ = __webpack_require__(9);
+var external_zlib_ = __webpack_require__(13);
 
 // CONCATENATED MODULE: ./node_modules/node-fetch/lib/index.mjs
 
@@ -7491,11 +7413,11 @@ lib_fetch.Promise = global.Promise;
 
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/assertThisInitialized.js
-var assertThisInitialized = __webpack_require__(4);
+var assertThisInitialized = __webpack_require__(8);
 var assertThisInitialized_default = /*#__PURE__*/__webpack_require__.n(assertThisInitialized);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/wrapNativeSuper.js
-var wrapNativeSuper = __webpack_require__(11);
+var wrapNativeSuper = __webpack_require__(9);
 var wrapNativeSuper_default = /*#__PURE__*/__webpack_require__.n(wrapNativeSuper);
 
 // CONCATENATED MODULE: ./node_modules/deprecation/dist-web/index.js
@@ -8178,6 +8100,388 @@ var dist_web_Octokit = /*#__PURE__*/function () {
 dist_web_Octokit.VERSION = core_dist_web_VERSION;
 dist_web_Octokit.plugins = [];
 
+
+/***/ }),
+/* 60 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+// ESM COMPAT FLAG
+__webpack_require__.r(__webpack_exports__);
+
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/regenerator/index.js
+var regenerator = __webpack_require__(0);
+var regenerator_default = /*#__PURE__*/__webpack_require__.n(regenerator);
+
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/defineProperty.js
+var defineProperty = __webpack_require__(12);
+var defineProperty_default = /*#__PURE__*/__webpack_require__.n(defineProperty);
+
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/asyncToGenerator.js
+var asyncToGenerator = __webpack_require__(3);
+var asyncToGenerator_default = /*#__PURE__*/__webpack_require__.n(asyncToGenerator);
+
+// EXTERNAL MODULE: external "fs"
+var external_fs_ = __webpack_require__(18);
+
+// EXTERNAL MODULE: ./node_modules/@actions/core/lib/core.js
+var core = __webpack_require__(11);
+
+// EXTERNAL MODULE: ./node_modules/@actions/github/lib/github.js
+var github = __webpack_require__(5);
+
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/classCallCheck.js
+var classCallCheck = __webpack_require__(2);
+var classCallCheck_default = /*#__PURE__*/__webpack_require__.n(classCallCheck);
+
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/inherits.js
+var inherits = __webpack_require__(4);
+var inherits_default = /*#__PURE__*/__webpack_require__.n(inherits);
+
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js
+var possibleConstructorReturn = __webpack_require__(6);
+var possibleConstructorReturn_default = /*#__PURE__*/__webpack_require__.n(possibleConstructorReturn);
+
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/getPrototypeOf.js
+var getPrototypeOf = __webpack_require__(1);
+var getPrototypeOf_default = /*#__PURE__*/__webpack_require__.n(getPrototypeOf);
+
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/wrapNativeSuper.js
+var wrapNativeSuper = __webpack_require__(9);
+var wrapNativeSuper_default = /*#__PURE__*/__webpack_require__.n(wrapNativeSuper);
+
+// CONCATENATED MODULE: ./src/github-exceptions.ts
+
+
+
+
+
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = getPrototypeOf_default()(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = getPrototypeOf_default()(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return possibleConstructorReturn_default()(this, result); }; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+/* eslint-disable max-classes-per-file */
+var github_exceptions_GitHubApiUnauthorizedError = /*#__PURE__*/function (_Error) {
+  inherits_default()(GitHubApiUnauthorizedError, _Error);
+
+  var _super = _createSuper(GitHubApiUnauthorizedError);
+
+  function GitHubApiUnauthorizedError(message) {
+    var _this;
+
+    classCallCheck_default()(this, GitHubApiUnauthorizedError);
+
+    _this = _super.call(this, message);
+    _this.name = 'GitHubApiUnauthorizedError';
+    return _this;
+  }
+
+  return GitHubApiUnauthorizedError;
+}( /*#__PURE__*/wrapNativeSuper_default()(Error));
+var github_exceptions_GitHubApiError = /*#__PURE__*/function (_Error2) {
+  inherits_default()(GitHubApiError, _Error2);
+
+  var _super2 = _createSuper(GitHubApiError);
+
+  function GitHubApiError(message) {
+    var _this2;
+
+    classCallCheck_default()(this, GitHubApiError);
+
+    _this2 = _super2.call(this, message);
+    _this2.name = 'GitHubApiError';
+    return _this2;
+  }
+
+  return GitHubApiError;
+}( /*#__PURE__*/wrapNativeSuper_default()(Error));
+// CONCATENATED MODULE: ./src/github-checks.ts
+
+
+
+
+var createCheck = /*#__PURE__*/function () {
+  var _ref = asyncToGenerator_default()( /*#__PURE__*/regenerator_default.a.mark(function _callee(octokit, owner, repo, title, ref) {
+    var response;
+    return regenerator_default.a.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            Object(core["info"])("Creating GitHub check in '".concat(owner, "/").concat(repo, "': ").concat(title, "}"));
+            _context.prev = 1;
+            _context.next = 4;
+            return octokit.checks.create({
+              owner: owner,
+              repo: repo,
+              name: title,
+              head_sha: ref,
+              status: 'in_progress'
+            });
+
+          case 4:
+            response = _context.sent;
+            return _context.abrupt("return", {
+              id: response.data.id,
+              name: response.data.name
+            });
+
+          case 8:
+            _context.prev = 8;
+            _context.t0 = _context["catch"](1);
+
+            if (!(_context.t0.message === 'Resource not accessible by integration')) {
+              _context.next = 12;
+              break;
+            }
+
+            throw new github_exceptions_GitHubApiUnauthorizedError("Unable to create a check, please make sure that the provided 'github-token' has write permissions to '".concat(owner, "/").concat(repo, "'. Details: ").concat(_context.t0));
+
+          case 12:
+            throw new github_exceptions_GitHubApiError("Unable to create a check to '".concat(owner, "/").concat(repo, "'. Details: ").concat(_context.t0));
+
+          case 13:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee, null, [[1, 8]]);
+  }));
+
+  return function createCheck(_x, _x2, _x3, _x4, _x5) {
+    return _ref.apply(this, arguments);
+  };
+}();
+var updateCheck = /*#__PURE__*/function () {
+  var _ref2 = asyncToGenerator_default()( /*#__PURE__*/regenerator_default.a.mark(function _callee2(octokit, owner, repo, checkRunId, conclusion, title, summary, annotations) {
+    return regenerator_default.a.wrap(function _callee2$(_context2) {
+      while (1) {
+        switch (_context2.prev = _context2.next) {
+          case 0:
+            Object(core["info"])("Updating GitHub check in '".concat(owner, "/").concat(repo, "': ").concat(title));
+            _context2.prev = 1;
+            _context2.next = 4;
+            return octokit.checks.update({
+              owner: owner,
+              repo: repo,
+              check_run_id: checkRunId,
+              status: 'completed',
+              conclusion: conclusion,
+              output: {
+                title: title,
+                summary: summary,
+                annotations: annotations
+              }
+            });
+
+          case 4:
+            _context2.next = 9;
+            break;
+
+          case 6:
+            _context2.prev = 6;
+            _context2.t0 = _context2["catch"](1);
+            throw new github_exceptions_GitHubApiError("Unable to update check '".concat(owner, "/").concat(repo, "' check_run_id: ").concat(checkRunId, ". Details: ").concat(_context2.t0));
+
+          case 9:
+          case "end":
+            return _context2.stop();
+        }
+      }
+    }, _callee2, null, [[1, 6]]);
+  }));
+
+  return function updateCheck(_x6, _x7, _x8, _x9, _x10, _x11, _x12, _x13) {
+    return _ref2.apply(this, arguments);
+  };
+}();
+var listChecks = /*#__PURE__*/function () {
+  var _ref3 = asyncToGenerator_default()( /*#__PURE__*/regenerator_default.a.mark(function _callee3(octokit, owner, repo, ref) {
+    var response;
+    return regenerator_default.a.wrap(function _callee3$(_context3) {
+      while (1) {
+        switch (_context3.prev = _context3.next) {
+          case 0:
+            Object(core["info"])("Listing GitHub checks in '".concat(owner, "/").concat(repo, ":").concat(ref, "'"));
+            _context3.prev = 1;
+            _context3.next = 4;
+            return octokit.checks.listForRef({
+              owner: owner,
+              repo: repo,
+              ref: ref
+            });
+
+          case 4:
+            response = _context3.sent;
+            return _context3.abrupt("return", response.data.check_runs.map(function (checkRun) {
+              return {
+                id: checkRun.id,
+                name: checkRun.name
+              };
+            }));
+
+          case 8:
+            _context3.prev = 8;
+            _context3.t0 = _context3["catch"](1);
+            throw new github_exceptions_GitHubApiError("Unable to list checks for '".concat(owner, "/").concat(repo, ":").concat(ref, "'. Details: ").concat(_context3.t0));
+
+          case 11:
+          case "end":
+            return _context3.stop();
+        }
+      }
+    }, _callee3, null, [[1, 8]]);
+  }));
+
+  return function listChecks(_x14, _x15, _x16, _x17) {
+    return _ref3.apply(this, arguments);
+  };
+}();
+// CONCATENATED MODULE: ./src/model.ts
+/* eslint-disable camelcase */
+var ANNOTATION_LEVEL_NOTICE = 'notice';
+var ANNOTATION_LEVEL_WARNING = 'warning';
+var ANNOTATION_LEVEL_FAILURE = 'failure';
+// CONCATENATED MODULE: ./src/index.ts
+
+
+
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { defineProperty_default()(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+
+
+
+
+
+
+var generateSummary = function generateSummary(failureCount, warningCount, noticeCount) {
+  var messages = [];
+
+  if (failureCount > 0) {
+    messages.push("".concat(failureCount, " failure(s)."));
+  }
+
+  if (warningCount > 0) {
+    messages.push("".concat(warningCount, " warning(s)."));
+  }
+
+  if (noticeCount > 0) {
+    messages.push("".concat(noticeCount, " notice(s)."));
+  }
+
+  return messages.join(' ');
+};
+
+var generateConclusion = function generateConclusion(failureCount, warningCount, noticeCount) {
+  if (failureCount > 0) {
+    return 'failure';
+  }
+
+  if (warningCount > 0 || noticeCount > 0) {
+    return 'neutral';
+  }
+
+  return 'success';
+};
+
+function run() {
+  return _run.apply(this, arguments);
+}
+
+function _run() {
+  _run = asyncToGenerator_default()( /*#__PURE__*/regenerator_default.a.mark(function _callee() {
+    var githubToken, jsonFilePath, fileContent, annotations, octokit, failureCount, warningCount, noticeCount, summary, conclusion, ref, currentChecks, currentCheck, updatePromises, chunkSize, index, annotationsBatch;
+    return regenerator_default.a.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            _context.prev = 0;
+            githubToken = Object(core["getInput"])('github-token', {
+              required: true
+            });
+            jsonFilePath = Object(core["getInput"])('json-file-path', {
+              required: true
+            });
+            _context.next = 5;
+            return external_fs_["promises"].readFile(jsonFilePath, 'utf8');
+
+          case 5:
+            fileContent = _context.sent;
+            annotations = JSON.parse(fileContent);
+            octokit = Object(github["getOctokit"])(githubToken);
+            failureCount = annotations.filter(function (annotation) {
+              return annotation.annotation_level === ANNOTATION_LEVEL_FAILURE;
+            }).length;
+            warningCount = annotations.filter(function (annotation) {
+              return annotation.annotation_level === ANNOTATION_LEVEL_WARNING;
+            }).length;
+            noticeCount = annotations.filter(function (annotation) {
+              return annotation.annotation_level === ANNOTATION_LEVEL_NOTICE;
+            }).length;
+            summary = generateSummary(failureCount, warningCount, noticeCount);
+            conclusion = generateConclusion(failureCount, warningCount, noticeCount);
+            Object(core["info"])("Summary: ".concat(summary));
+            Object(core["info"])("Conclusion: ".concat(conclusion));
+            ref = github["context"].payload.pull_request ? github["context"].payload.pull_request.head.sha : github["context"].sha;
+            _context.next = 18;
+            return listChecks(octokit, github["context"].repo.owner, github["context"].repo.repo, ref);
+
+          case 18:
+            currentChecks = _context.sent;
+            currentCheck = currentChecks.find(function (check) {
+              return check.name === github["context"].job;
+            });
+
+            if (currentCheck) {
+              _context.next = 24;
+              break;
+            }
+
+            _context.next = 23;
+            return createCheck(octokit, github["context"].repo.owner, github["context"].repo.repo, github["context"].job, ref);
+
+          case 23:
+            currentCheck = _context.sent;
+
+          case 24:
+            updatePromises = [];
+            chunkSize = 50;
+
+            for (index = 0; index < annotations.length; index += chunkSize) {
+              annotationsBatch = annotations.slice(index, index + chunkSize).map(function (annotation) {
+                return _objectSpread(_objectSpread({}, annotation), {}, {
+                  end_line: annotation.end_line || annotation.start_line
+                });
+              });
+              updatePromises.push(updateCheck(octokit, github["context"].repo.owner, github["context"].repo.repo, currentCheck.id, conclusion, currentCheck.name, summary, annotationsBatch));
+            }
+
+            _context.next = 29;
+            return Promise.all(updatePromises);
+
+          case 29:
+            _context.next = 34;
+            break;
+
+          case 31:
+            _context.prev = 31;
+            _context.t0 = _context["catch"](0);
+            Object(core["setFailed"])(_context.t0.message);
+
+          case 34:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee, null, [[0, 31]]);
+  }));
+  return _run.apply(this, arguments);
+}
+
+run();
 
 /***/ })
 /******/ ]);
