@@ -17,7 +17,7 @@ export const createCheck = async (octokit: InstanceType<typeof GitHub>, owner: s
     return {
       id: response.data.id,
       name: response.data.name,
-    }
+    };
   } catch (err) {
     if (err.message === 'Resource not accessible by integration') {
       throw new GitHubApiUnauthorizedError(`Unable to create a check, please make sure that the provided 'github-token' has write permissions to '${owner}/${repo}'. Details: ${err}`);
@@ -38,13 +38,13 @@ export const updateCheck = async (octokit: InstanceType<typeof GitHub>, owner: s
       output: {
         title,
         summary,
-        annotations
-      }
-    })
+        annotations,
+      },
+    });
   } catch (err) {
-    throw new GitHubApiError(`Unable to update check '${owner}/${repo}' check_run_id: ${checkRunId}. Details: ${err}`)
+    throw new GitHubApiError(`Unable to update check '${owner}/${repo}' check_run_id: ${checkRunId}. Details: ${err}`);
   }
-}
+};
 
 export interface ICheck {
   id: number;
@@ -54,7 +54,7 @@ export interface ICheck {
 export const listChecks = async (octokit: InstanceType<typeof GitHub>, owner: string, repo: string, ref: string): Promise<ICheck[]> => {
   logInfo(`Listing GitHub checks in '${owner}/${repo}:${ref}'`);
   try {
-    const response = await octokit.checks.listForRef({owner, repo, ref});
+    const response = await octokit.checks.listForRef({ owner, repo, ref });
     return response.data.check_runs.map((checkRun: object): ICheck => {
       return {
         id: checkRun.id,
@@ -62,6 +62,6 @@ export const listChecks = async (octokit: InstanceType<typeof GitHub>, owner: st
       };
     });
   } catch (err) {
-    throw new GitHubApiError(`Unable to list checks for '${owner}/${repo}:${ref}'. Details: ${err}`)
+    throw new GitHubApiError(`Unable to list checks for '${owner}/${repo}:${ref}'. Details: ${err}`);
   }
-}
+};

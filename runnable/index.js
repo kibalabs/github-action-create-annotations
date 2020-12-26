@@ -8338,7 +8338,7 @@ var listChecks = /*#__PURE__*/function () {
   };
 }();
 // CONCATENATED MODULE: ./src/model.ts
-;
+/* eslint-disable camelcase */
 var ANNOTATION_LEVEL_NOTICE = 'notice';
 var ANNOTATION_LEVEL_WARNING = 'warning';
 var ANNOTATION_LEVEL_FAILURE = 'failure';
@@ -8380,7 +8380,7 @@ var generateConclusion = function generateConclusion(failureCount, warningCount,
     return 'failure';
   }
 
-  if (warningCount > 0) {
+  if (warningCount > 0 || noticeCount > 0) {
     return 'neutral';
   }
 
@@ -8393,7 +8393,7 @@ function run() {
 
 function _run() {
   _run = asyncToGenerator_default()( /*#__PURE__*/regenerator_default.a.mark(function _callee() {
-    var githubToken, jsonFilePath, fileContent, annotations, octokit, failureCount, warningCount, noticeCount, summary, conclusion, ref, currentChecks, currentCheck, chunkSize, index, annotationsBatch;
+    var githubToken, jsonFilePath, fileContent, annotations, octokit, failureCount, warningCount, noticeCount, summary, conclusion, ref, currentChecks, currentCheck, updatePromises, chunkSize, index, annotationsBatch;
     return regenerator_default.a.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
@@ -8431,8 +8431,8 @@ function _run() {
 
           case 18:
             currentChecks = _context.sent;
-            currentCheck = currentChecks.find(function (currentCheck) {
-              return currentCheck.name === github["context"].job;
+            currentCheck = currentChecks.find(function (check) {
+              return check.name === github["context"].job;
             });
 
             if (currentCheck) {
@@ -8447,43 +8447,36 @@ function _run() {
             currentCheck = _context.sent;
 
           case 24:
+            updatePromises = [];
             chunkSize = 50;
-            index = 0;
 
-          case 26:
-            if (!(index < annotations.length)) {
-              _context.next = 33;
-              break;
+            for (index = 0; index < annotations.length; index += chunkSize) {
+              annotationsBatch = annotations.slice(index, index + chunkSize).map(function (annotation) {
+                return _objectSpread(_objectSpread({}, annotation), {}, {
+                  end_line: annotation.end_line || annotation.start_line
+                });
+              });
+              updatePromises.push(updateCheck(octokit, github["context"].repo.owner, github["context"].repo.repo, currentCheck.id, conclusion, currentCheck.name, summary, annotationsBatch));
             }
 
-            annotationsBatch = annotations.slice(index, index + chunkSize).map(function (annotation) {
-              return _objectSpread(_objectSpread({}, annotation), {}, {
-                end_line: annotation.end_line || annotation.start_line
-              });
-            });
-            _context.next = 30;
-            return updateCheck(octokit, github["context"].repo.owner, github["context"].repo.repo, currentCheck.id, conclusion, currentCheck.name, summary, annotationsBatch);
+            _context.next = 29;
+            return Promise.all(updatePromises);
 
-          case 30:
-            index += chunkSize;
-            _context.next = 26;
+          case 29:
+            _context.next = 34;
             break;
 
-          case 33:
-            _context.next = 38;
-            break;
-
-          case 35:
-            _context.prev = 35;
+          case 31:
+            _context.prev = 31;
             _context.t0 = _context["catch"](0);
             Object(core["setFailed"])(_context.t0.message);
 
-          case 38:
+          case 34:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, null, [[0, 35]]);
+    }, _callee, null, [[0, 31]]);
   }));
   return _run.apply(this, arguments);
 }

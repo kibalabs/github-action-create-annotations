@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 
 export interface IAnnotation {
   file: string;
@@ -8,7 +9,7 @@ export interface IAnnotation {
   title?: string;
   message: string;
   annotation_level: string;
-};
+}
 
 export const ANNOTATION_LEVEL_NOTICE = 'notice';
 export const ANNOTATION_LEVEL_WARNING = 'warning';
