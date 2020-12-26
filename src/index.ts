@@ -37,14 +37,6 @@ async function run(): Promise<void> {
     const annotations = JSON.parse(fileContent) as IAnnotation[];
     const octokit = getOctokit(githubToken);
 
-    const pullRequest = githubContext.payload.pull_request;
-    let ref;
-    if (pullRequest) {
-      ref = pullRequest.head.sha;
-    } else {
-      ref = githubContext.sha;
-    }
-
     const failureCount = annotations.filter((annotation: IAnnotation): boolean => annotation.annotation_level === ANNOTATION_LEVEL_FAILURE).length;
     const warningCount = annotations.filter((annotation: IAnnotation): boolean => annotation.annotation_level === ANNOTATION_LEVEL_WARNING).length;
     const noticeCount = annotations.filter((annotation: IAnnotation): boolean => annotation.annotation_level === ANNOTATION_LEVEL_NOTICE).length;
@@ -53,9 +45,9 @@ async function run(): Promise<void> {
     logInfo(`Summary: ${summary}`);
     logInfo(`Conclusion: ${conclusion}`);
 
+    const ref = githubContext.payload.pull_request ? githubContext.payload.pull_request.head.sha : githubContext.sha;
     const currentChecks = await listChecks(octokit, githubContext.repo.owner, githubContext.repo.repo, ref);
     var currentCheck = currentChecks.find((currentCheck: ICheck): boolean => currentCheck.name === githubContext.job);
-    logInfo(`currentCheck: ${JSON.stringify(currentCheck)}`);
     if (!currentCheck) {
       currentCheck = await createCheck(octokit, githubContext.repo.owner, githubContext.repo.repo, title, ref);
     }
