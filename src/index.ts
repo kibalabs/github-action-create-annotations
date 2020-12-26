@@ -1,28 +1,28 @@
 import { promises as fs } from 'fs';
-import * as core from '@actions/core';
-import * as github from '@actions/github';
+import { info as logInfo, getInput, setFailed } from '@actions/core';
+import { getOctokit, context as githubContext } from '@actions/github';
 
 async function run(): Promise<void> {
   try {
-    const githubToken: string = core.getInput('github-token', { required: true });
-    const jsonFilePath: string = core.getInput('json-file-path', { required: true });
-    core.info(`jsonFilePath: ${jsonFilePath}`);
+    const githubToken: string = getInput('github-token', { required: true });
+    const jsonFilePath: string = getInput('json-file-path', { required: true });
+    logInfo(`jsonFilePath: ${jsonFilePath}`);
     const fileContent = await fs.readFile(jsonFilePath, 'utf8');
     const annotations = JSON.parse(fileContent);
-    const octokit = github.getOctokit(githubToken);
+    const octokit = getOctokit(githubToken);
 
-    const pullRequest = github.context.payload.pull_request;
+    const pullRequest = githubContext.payload.pull_request;
     let ref;
     if (pullRequest) {
       ref = pullRequest.head.sha;
     } else {
-      ref = github.context.sha;
+      ref = githubContext.sha;
     }
-    // const owner = github.context.repo.owner;
-    // const repo = github.context.repo.repo;
-    core.info(`here: ${jsonFilePath} ${ref} ${annotations} ${octokit}`);
+    // const owner = githubContext.repo.owner;
+    // const repo = githubContext.repo.repo;
+    logInfo(`here: ${jsonFilePath} ${ref} ${annotations} ${octokit}`);
   } catch (error) {
-    core.setFailed(error.message);
+    setFailed(error.message);
   }
 }
 
