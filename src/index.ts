@@ -4,8 +4,8 @@ import * as github from '@actions/github';
 
 async function run(): Promise<void> {
   try {
-    const githubToken: string = core.getInput('github-token');
-    const jsonFilePath: string = core.getInput('json-file-path');
+    const githubToken: string = core.getInput('github-token', { required: true });
+    const jsonFilePath: string = core.getInput('json-file-path', { required: true });
     core.info(`jsonFilePath: ${jsonFilePath}`);
     const fileContent = await fs.readFile(jsonFilePath, 'utf8');
     const annotations = JSON.parse(fileContent);
