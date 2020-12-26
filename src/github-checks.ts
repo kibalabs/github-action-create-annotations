@@ -7,7 +7,7 @@ import { IAnnotation } from './model';
 export const createCheck = async (octokit: InstanceType<typeof GitHub>, owner: string, repo: string, title: string, ref: string): Promise<ICheck> => {
   logInfo(`Creating GitHub check in '${owner}/${repo}': ${title}}`);
   try {
-    const check = await octokit.checks.create({
+    const response = await octokit.checks.create({
       owner,
       repo,
       name: title,
@@ -15,8 +15,8 @@ export const createCheck = async (octokit: InstanceType<typeof GitHub>, owner: s
       status: 'in_progress',
     });
     return {
-      id: check.data.id,
-      name: check.data.name,
+      id: response.data.id,
+      name: response.data.name,
     }
   } catch (err) {
     if (err.message === 'Resource not accessible by integration') {
@@ -54,9 +54,9 @@ export interface ICheck {
 export const listChecks = async (octokit: InstanceType<typeof GitHub>, owner: string, repo: string, ref: string): Promise<ICheck[]> => {
   logInfo(`Listing GitHub checks in '${owner}/${repo}:${ref}'`);
   try {
-    const checks = await octokit.checks.listForRef({owner, repo, ref});
-    logInfo(`checks: ${JSON.stringify(checks)}`);
-    return checks.checkRuns.map((checkRun: object): ICheck => {
+    const response = await octokit.checks.listForRef({owner, repo, ref});
+    logInfo(`response: ${JSON.stringify(response)}`);
+    return response.data.check_runs.map((checkRun: object): ICheck => {
       return {
         id: checkRun.id,
         name: checkRun.name,

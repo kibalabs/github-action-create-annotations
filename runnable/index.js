@@ -8203,7 +8203,7 @@ var github_exceptions_GitHubApiError = /*#__PURE__*/function (_Error2) {
 
 var createCheck = /*#__PURE__*/function () {
   var _ref = asyncToGenerator_default()( /*#__PURE__*/regenerator_default.a.mark(function _callee(octokit, owner, repo, title, ref) {
-    var check;
+    var response;
     return regenerator_default.a.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
@@ -8220,10 +8220,10 @@ var createCheck = /*#__PURE__*/function () {
             });
 
           case 4:
-            check = _context.sent;
+            response = _context.sent;
             return _context.abrupt("return", {
-              id: check.data.id,
-              name: check.data.name
+              id: response.data.id,
+              name: response.data.name
             });
 
           case 8:
@@ -8297,7 +8297,7 @@ var updateCheck = /*#__PURE__*/function () {
 }();
 var listChecks = /*#__PURE__*/function () {
   var _ref3 = asyncToGenerator_default()( /*#__PURE__*/regenerator_default.a.mark(function _callee3(octokit, owner, repo, ref) {
-    var checks;
+    var response;
     return regenerator_default.a.wrap(function _callee3$(_context3) {
       while (1) {
         switch (_context3.prev = _context3.next) {
@@ -8312,9 +8312,9 @@ var listChecks = /*#__PURE__*/function () {
             });
 
           case 4:
-            checks = _context3.sent;
-            Object(core["info"])("checks: ".concat(JSON.stringify(checks)));
-            return _context3.abrupt("return", checks.checkRuns.map(function (checkRun) {
+            response = _context3.sent;
+            Object(core["info"])("response: ".concat(JSON.stringify(response)));
+            return _context3.abrupt("return", response.data.check_runs.map(function (checkRun) {
               return {
                 id: checkRun.id,
                 name: checkRun.name
