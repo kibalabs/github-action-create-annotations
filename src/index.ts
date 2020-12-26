@@ -6,7 +6,7 @@ async function run(): Promise<void> {
   try {
     const githubToken: string = core.getInput('github-token');
     const jsonFilePath: string = core.getInput('json-file-path');
-    console.log('jsonFilePath', jsonFilePath);
+    core.info(`jsonFilePath: ${jsonFilePath}`);
     const fileContent = await fs.readFile(jsonFilePath, 'utf8');
     const annotations = JSON.parse(fileContent);
     const octokit = github.getOctokit(githubToken);
