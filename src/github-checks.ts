@@ -55,7 +55,7 @@ export const listChecks = async (octokit: InstanceType<typeof GitHub>, owner: st
   logInfo(`Listing GitHub checks in '${owner}/${repo}:${ref}'`);
   try {
     const response = await octokit.checks.listForRef({ owner, repo, ref });
-    return response.data.check_runs.map((checkRun: object): ICheck => {
+    return response.data.check_runs.map((checkRun: Record<string, unknown>): ICheck => {
       return {
         id: checkRun.id,
         name: checkRun.name,

@@ -50,7 +50,7 @@ async function run(): Promise<void> {
     const currentChecks = await listChecks(octokit, githubContext.repo.owner, githubContext.repo.repo, ref);
     let currentCheck = currentChecks.find((check: ICheck): boolean => check.name === githubContext.job);
     if (!currentCheck) {
-      currentCheck = await createCheck(octokit, githubContext.repo.owner, githubContext.repo.repo, title, ref);
+      currentCheck = await createCheck(octokit, githubContext.repo.owner, githubContext.repo.repo, githubContext.job, ref);
     }
 
     const updatePromises = [];

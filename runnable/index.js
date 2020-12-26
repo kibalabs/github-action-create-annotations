@@ -195,24 +195,6 @@ module.exports = _inherits;
 /* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var _typeof = __webpack_require__(14);
-
-var assertThisInitialized = __webpack_require__(8);
-
-function _possibleConstructorReturn(self, call) {
-  if (call && (_typeof(call) === "object" || typeof call === "function")) {
-    return call;
-  }
-
-  return assertThisInitialized(self);
-}
-
-module.exports = _possibleConstructorReturn;
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
 "use strict";
 
 
@@ -272,6 +254,24 @@ function getOctokit(token, options) {
 }
 
 exports.getOctokit = getOctokit;
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var _typeof = __webpack_require__(14);
+
+var assertThisInitialized = __webpack_require__(8);
+
+function _possibleConstructorReturn(self, call) {
+  if (call && (_typeof(call) === "object" || typeof call === "function")) {
+    return call;
+  }
+
+  return assertThisInitialized(self);
+}
+
+module.exports = _possibleConstructorReturn;
 
 /***/ }),
 /* 7 */
@@ -2273,7 +2273,7 @@ var _assertThisInitialized = __webpack_require__(8);
 
 var _inherits = __webpack_require__(4);
 
-var _possibleConstructorReturn = __webpack_require__(5);
+var _possibleConstructorReturn = __webpack_require__(6);
 
 var _getPrototypeOf = __webpack_require__(1);
 
@@ -5230,7 +5230,7 @@ var inherits = __webpack_require__(4);
 var inherits_default = /*#__PURE__*/__webpack_require__.n(inherits);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js
-var possibleConstructorReturn = __webpack_require__(5);
+var possibleConstructorReturn = __webpack_require__(6);
 var possibleConstructorReturn_default = /*#__PURE__*/__webpack_require__.n(possibleConstructorReturn);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/getPrototypeOf.js
@@ -8128,7 +8128,7 @@ var external_fs_ = __webpack_require__(18);
 var core = __webpack_require__(11);
 
 // EXTERNAL MODULE: ./node_modules/@actions/github/lib/github.js
-var github = __webpack_require__(6);
+var github = __webpack_require__(5);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/classCallCheck.js
 var classCallCheck = __webpack_require__(2);
@@ -8139,7 +8139,7 @@ var inherits = __webpack_require__(4);
 var inherits_default = /*#__PURE__*/__webpack_require__.n(inherits);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js
-var possibleConstructorReturn = __webpack_require__(5);
+var possibleConstructorReturn = __webpack_require__(6);
 var possibleConstructorReturn_default = /*#__PURE__*/__webpack_require__.n(possibleConstructorReturn);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/getPrototypeOf.js
@@ -8441,7 +8441,7 @@ function _run() {
             }
 
             _context.next = 23;
-            return createCheck(octokit, github["context"].repo.owner, github["context"].repo.repo, title, ref);
+            return createCheck(octokit, github["context"].repo.owner, github["context"].repo.repo, github["context"].job, ref);
 
           case 23:
             currentCheck = _context.sent;
