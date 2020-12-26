@@ -233,72 +233,6 @@ module.exports = _assertThisInitialized;
 /* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var getPrototypeOf = __webpack_require__(1);
-
-var setPrototypeOf = __webpack_require__(22);
-
-var isNativeFunction = __webpack_require__(41);
-
-var construct = __webpack_require__(42);
-
-function _wrapNativeSuper(Class) {
-  var _cache = typeof Map === "function" ? new Map() : undefined;
-
-  module.exports = _wrapNativeSuper = function _wrapNativeSuper(Class) {
-    if (Class === null || !isNativeFunction(Class)) return Class;
-
-    if (typeof Class !== "function") {
-      throw new TypeError("Super expression must either be null or a function");
-    }
-
-    if (typeof _cache !== "undefined") {
-      if (_cache.has(Class)) return _cache.get(Class);
-
-      _cache.set(Class, Wrapper);
-    }
-
-    function Wrapper() {
-      return construct(Class, arguments, getPrototypeOf(this).constructor);
-    }
-
-    Wrapper.prototype = Object.create(Class.prototype, {
-      constructor: {
-        value: Wrapper,
-        enumerable: false,
-        writable: true,
-        configurable: true
-      }
-    });
-    return setPrototypeOf(Wrapper, Class);
-  };
-
-  return _wrapNativeSuper(Class);
-}
-
-module.exports = _wrapNativeSuper;
-
-/***/ }),
-/* 9 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var arrayWithHoles = __webpack_require__(33);
-
-var iterableToArrayLimit = __webpack_require__(34);
-
-var unsupportedIterableToArray = __webpack_require__(35);
-
-var nonIterableRest = __webpack_require__(37);
-
-function _slicedToArray(arr, i) {
-  return arrayWithHoles(arr) || iterableToArrayLimit(arr, i) || unsupportedIterableToArray(arr, i) || nonIterableRest();
-}
-
-module.exports = _slicedToArray;
-
-/***/ }),
-/* 10 */
-/***/ (function(module, exports, __webpack_require__) {
-
 "use strict";
 
 
@@ -641,6 +575,72 @@ function getState(name) {
 exports.getState = getState;
 
 /***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var getPrototypeOf = __webpack_require__(1);
+
+var setPrototypeOf = __webpack_require__(22);
+
+var isNativeFunction = __webpack_require__(41);
+
+var construct = __webpack_require__(42);
+
+function _wrapNativeSuper(Class) {
+  var _cache = typeof Map === "function" ? new Map() : undefined;
+
+  module.exports = _wrapNativeSuper = function _wrapNativeSuper(Class) {
+    if (Class === null || !isNativeFunction(Class)) return Class;
+
+    if (typeof Class !== "function") {
+      throw new TypeError("Super expression must either be null or a function");
+    }
+
+    if (typeof _cache !== "undefined") {
+      if (_cache.has(Class)) return _cache.get(Class);
+
+      _cache.set(Class, Wrapper);
+    }
+
+    function Wrapper() {
+      return construct(Class, arguments, getPrototypeOf(this).constructor);
+    }
+
+    Wrapper.prototype = Object.create(Class.prototype, {
+      constructor: {
+        value: Wrapper,
+        enumerable: false,
+        writable: true,
+        configurable: true
+      }
+    });
+    return setPrototypeOf(Wrapper, Class);
+  };
+
+  return _wrapNativeSuper(Class);
+}
+
+module.exports = _wrapNativeSuper;
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var arrayWithHoles = __webpack_require__(33);
+
+var iterableToArrayLimit = __webpack_require__(34);
+
+var unsupportedIterableToArray = __webpack_require__(35);
+
+var nonIterableRest = __webpack_require__(37);
+
+function _slicedToArray(arr, i) {
+  return arrayWithHoles(arr) || iterableToArrayLimit(arr, i) || unsupportedIterableToArray(arr, i) || nonIterableRest();
+}
+
+module.exports = _slicedToArray;
+
+/***/ }),
 /* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -856,7 +856,7 @@ module.exports = _setPrototypeOf;
 "use strict";
 
 
-var _slicedToArray = __webpack_require__(9);
+var _slicedToArray = __webpack_require__(10);
 
 var _classCallCheck = __webpack_require__(2);
 
@@ -2277,7 +2277,7 @@ var _possibleConstructorReturn = __webpack_require__(5);
 
 var _getPrototypeOf = __webpack_require__(1);
 
-var _wrapNativeSuper = __webpack_require__(8);
+var _wrapNativeSuper = __webpack_require__(9);
 
 function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
@@ -3888,7 +3888,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "restEndpointMethods", function() { return restEndpointMethods; });
 /* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(12);
 /* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(9);
+/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(10);
 /* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1__);
 
 
@@ -5281,7 +5281,7 @@ function getUserAgent() {
 var before_after_hook = __webpack_require__(25);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/slicedToArray.js
-var slicedToArray = __webpack_require__(9);
+var slicedToArray = __webpack_require__(10);
 var slicedToArray_default = /*#__PURE__*/__webpack_require__.n(slicedToArray);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/defineProperty.js
@@ -7417,7 +7417,7 @@ var assertThisInitialized = __webpack_require__(7);
 var assertThisInitialized_default = /*#__PURE__*/__webpack_require__.n(assertThisInitialized);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/wrapNativeSuper.js
-var wrapNativeSuper = __webpack_require__(8);
+var wrapNativeSuper = __webpack_require__(9);
 var wrapNativeSuper_default = /*#__PURE__*/__webpack_require__.n(wrapNativeSuper);
 
 // CONCATENATED MODULE: ./node_modules/deprecation/dist-web/index.js
@@ -8125,7 +8125,7 @@ var asyncToGenerator_default = /*#__PURE__*/__webpack_require__.n(asyncToGenerat
 var external_fs_ = __webpack_require__(18);
 
 // EXTERNAL MODULE: ./node_modules/@actions/core/lib/core.js
-var core = __webpack_require__(10);
+var core = __webpack_require__(8);
 
 // EXTERNAL MODULE: ./node_modules/@actions/github/lib/github.js
 var github = __webpack_require__(11);
@@ -8147,7 +8147,7 @@ var getPrototypeOf = __webpack_require__(1);
 var getPrototypeOf_default = /*#__PURE__*/__webpack_require__.n(getPrototypeOf);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/wrapNativeSuper.js
-var wrapNativeSuper = __webpack_require__(8);
+var wrapNativeSuper = __webpack_require__(9);
 var wrapNativeSuper_default = /*#__PURE__*/__webpack_require__.n(wrapNativeSuper);
 
 // CONCATENATED MODULE: ./src/github-exceptions.ts
@@ -8292,6 +8292,49 @@ var updateCheck = /*#__PURE__*/function () {
     return _ref2.apply(this, arguments);
   };
 }();
+var listChecks = /*#__PURE__*/function () {
+  var _ref3 = asyncToGenerator_default()( /*#__PURE__*/regenerator_default.a.mark(function _callee3(octokit, owner, repo, ref) {
+    var checks;
+    return regenerator_default.a.wrap(function _callee3$(_context3) {
+      while (1) {
+        switch (_context3.prev = _context3.next) {
+          case 0:
+            Object(core["info"])("Listing GitHub checks in '".concat(owner, "/").concat(repo, ":").concat(ref, "'"));
+            _context3.prev = 1;
+            _context3.next = 4;
+            return octokit.checks.listForRef({
+              owner: owner,
+              repo: repo,
+              ref: ref
+            });
+
+          case 4:
+            checks = _context3.sent;
+            return _context3.abrupt("return", checks.data.checkRuns.map(function (checkRun) {
+              return {
+                id: checkRun.id,
+                name: checkRun.name,
+                status: checkRun.status
+              };
+            }));
+
+          case 8:
+            _context3.prev = 8;
+            _context3.t0 = _context3["catch"](1);
+            throw new github_exceptions_GitHubApiError("Unable to list checks for '".concat(owner, "/").concat(repo, ":").concat(ref, "'. Details: ").concat(_context3.t0));
+
+          case 11:
+          case "end":
+            return _context3.stop();
+        }
+      }
+    }, _callee3, null, [[1, 8]]);
+  }));
+
+  return function listChecks(_x14, _x15, _x16, _x17) {
+    return _ref3.apply(this, arguments);
+  };
+}();
 // CONCATENATED MODULE: ./src/model.ts
 ;
 var ANNOTATION_LEVEL_NOTICE = 'notice';
@@ -8348,7 +8391,7 @@ function run() {
 
 function _run() {
   _run = asyncToGenerator_default()( /*#__PURE__*/regenerator_default.a.mark(function _callee() {
-    var githubToken, jsonFilePath, fileContent, annotations, octokit, pullRequest, ref, output, failureCount, warningCount, noticeCount, summary, conclusion, checkRunId, chunkSize, index, annotationsBatch;
+    var githubToken, jsonFilePath, fileContent, annotations, octokit, pullRequest, ref, checks, failureCount, warningCount, noticeCount, summary, conclusion, checkRunId, chunkSize, index, annotationsBatch;
     return regenerator_default.a.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
@@ -8376,15 +8419,11 @@ function _run() {
             }
 
             _context.next = 12;
-            return octokit.checks.listForRef({
-              owner: github["context"].repo.owner,
-              repo: github["context"].repo.repo,
-              ref: ref
-            });
+            return listChecks(octokit, github["context"].repo.owner, github["context"].repo.repo, ref);
 
           case 12:
-            output = _context.sent;
-            Object(core["info"])("output: ".concat(JSON.stringify(output)));
+            checks = _context.sent;
+            Object(core["info"])("output: ".concat(JSON.stringify(checks)));
             failureCount = annotations.filter(function (annotation) {
               return annotation.annotation_level === ANNOTATION_LEVEL_FAILURE;
             }).length;

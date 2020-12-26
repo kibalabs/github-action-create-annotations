@@ -42,3 +42,25 @@ export const updateCheck = async (octokit: GitHub, owner: string, repo: string, 
     throw new GitHubApiError(`Unable to update check '${owner}/${repo}' check_run_id: ${checkRunId}. Details: ${err}`)
   }
 }
+
+export interface ICheck {
+  id: number;
+  name: string;
+  status: string;
+}
+
+export const listChecks = async (octokit: GitHub, owner: string, repo: string, ref: string): Promise<ICheck[]> => {
+  logInfo(`Listing GitHub checks in '${owner}/${repo}:${ref}'`);
+  try {
+    const checks = await octokit.checks.listForRef({owner, repo, ref});
+    return checks.data.checkRuns.map((checkRun: object): ICheck => {
+      return {
+        id: checkRun.id,
+        name: checkRun.name,
+        status: checkRun.status,
+      };
+    });
+  } catch (err) {
+    throw new GitHubApiError(`Unable to list checks for '${owner}/${repo}:${ref}'. Details: ${err}`)
+  }
+}

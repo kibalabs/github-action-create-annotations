@@ -2,7 +2,7 @@ import { promises as fs } from 'fs';
 
 import { getInput, info as logInfo, setFailed } from '@actions/core';
 import { getOctokit, context as githubContext } from '@actions/github';
-import { createCheck, updateCheck } from './github-checks';
+import { createCheck, listChecks, updateCheck } from './github-checks';
 import { ANNOTATION_LEVEL_FAILURE, ANNOTATION_LEVEL_NOTICE, ANNOTATION_LEVEL_WARNING, IAnnotation } from './model';
 
 const generateSummary = function (failureCount: number, warningCount: number, noticeCount: number): string {
@@ -45,8 +45,8 @@ async function run(): Promise<void> {
       ref = githubContext.sha;
     }
 
-    const output = await octokit.checks.listForRef({owner: githubContext.repo.owner, repo: githubContext.repo.repo, ref: ref});
-    logInfo(`output: ${JSON.stringify(output)}`);
+    const checks = await listChecks(octokit, githubContext.repo.owner, githubContext.repo.repo, ref);
+    logInfo(`output: ${JSON.stringify(checks)}`);
 
     const failureCount = annotations.filter((annotation: IAnnotation): boolean => annotation.annotation_level === ANNOTATION_LEVEL_FAILURE).length;
     const warningCount = annotations.filter((annotation: IAnnotation): boolean => annotation.annotation_level === ANNOTATION_LEVEL_WARNING).length;
