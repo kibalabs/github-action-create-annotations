@@ -11,14 +11,6 @@ inputs:
   json-file-path:
     description: 'Path to a JSON file which contains a list of annotations.'
     required: true
-  ignore-unauthorized-error:
-    description: 'Ignore errors when the provided repo-token does not have write permissions'
-    required: false
-    default: false
-  ignore-missing-file:
-    description: 'Ignore if the file which contains annotations is missing'
-    required: false
-    default: true
 runs:
   using: 'node12'
   main: 'runnable/index.js'
