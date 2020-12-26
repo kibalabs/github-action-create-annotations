@@ -346,6 +346,34 @@ module.exports = _defineProperty;
 
 /***/ }),
 /* 13 */
+/***/ (function(module, exports) {
+
+function _defineProperties(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor) descriptor.writable = true;
+    Object.defineProperty(target, descriptor.key, descriptor);
+  }
+}
+
+function _createClass(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties(Constructor, staticProps);
+  return Constructor;
+}
+
+module.exports = _createClass;
+
+/***/ }),
+/* 14 */
+/***/ (function(module, exports) {
+
+module.exports = require("http");
+
+/***/ }),
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -690,34 +718,6 @@ function getState(name) {
 exports.getState = getState;
 
 /***/ }),
-/* 14 */
-/***/ (function(module, exports) {
-
-function _defineProperties(target, props) {
-  for (var i = 0; i < props.length; i++) {
-    var descriptor = props[i];
-    descriptor.enumerable = descriptor.enumerable || false;
-    descriptor.configurable = true;
-    if ("value" in descriptor) descriptor.writable = true;
-    Object.defineProperty(target, descriptor.key, descriptor);
-  }
-}
-
-function _createClass(Constructor, protoProps, staticProps) {
-  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
-  if (staticProps) _defineProperties(Constructor, staticProps);
-  return Constructor;
-}
-
-module.exports = _createClass;
-
-/***/ }),
-/* 15 */
-/***/ (function(module, exports) {
-
-module.exports = require("http");
-
-/***/ }),
 /* 16 */
 /***/ (function(module, exports) {
 
@@ -860,7 +860,7 @@ var _slicedToArray = __webpack_require__(8);
 
 var _classCallCheck = __webpack_require__(2);
 
-var _createClass = __webpack_require__(14);
+var _createClass = __webpack_require__(13);
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -1098,7 +1098,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_asyncToGenerator__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(17);
 /* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(fs__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _actions_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(13);
+/* harmony import */ var _actions_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(15);
 /* harmony import */ var _actions_core__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_actions_core__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _actions_github__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(19);
 /* harmony import */ var _actions_github__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_actions_github__WEBPACK_IMPORTED_MODULE_4__);
@@ -1126,11 +1126,10 @@ function _run() {
             jsonFilePath = Object(_actions_core__WEBPACK_IMPORTED_MODULE_3__["getInput"])('json-file-path', {
               required: true
             });
-            Object(_actions_core__WEBPACK_IMPORTED_MODULE_3__["info"])("jsonFilePath: ".concat(jsonFilePath));
-            _context.next = 6;
+            _context.next = 5;
             return fs__WEBPACK_IMPORTED_MODULE_2__["promises"].readFile(jsonFilePath, 'utf8');
 
-          case 6:
+          case 5:
             fileContent = _context.sent;
             annotations = JSON.parse(fileContent);
             octokit = Object(_actions_github__WEBPACK_IMPORTED_MODULE_4__["getOctokit"])(githubToken);
@@ -1144,21 +1143,21 @@ function _run() {
             // const repo = githubContext.repo.repo;
 
 
-            Object(_actions_core__WEBPACK_IMPORTED_MODULE_3__["info"])("here: ".concat(jsonFilePath, " ").concat(ref, " ").concat(annotations, " ").concat(octokit));
-            _context.next = 17;
+            Object(_actions_core__WEBPACK_IMPORTED_MODULE_3__["info"])("here: ".concat(jsonFilePath, " ").concat(ref, " ").concat(JSON.stringify(annotations), " ").concat(octokit));
+            _context.next = 16;
             break;
 
-          case 14:
-            _context.prev = 14;
+          case 13:
+            _context.prev = 13;
             _context.t0 = _context["catch"](0);
             Object(_actions_core__WEBPACK_IMPORTED_MODULE_3__["setFailed"])(_context.t0.message);
 
-          case 17:
+          case 16:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, null, [[0, 14]]);
+    }, _callee, null, [[0, 13]]);
   }));
   return _run.apply(this, arguments);
 }
@@ -1932,7 +1931,7 @@ module.exports = function(module) {
 
 var _classCallCheck = __webpack_require__(2);
 
-var _createClass = __webpack_require__(14);
+var _createClass = __webpack_require__(13);
 
 var __importStar = this && this.__importStar || function (mod) {
   if (mod && mod.__esModule) return mod;
@@ -2344,7 +2343,7 @@ var _regeneratorRuntime = __webpack_require__(0);
 
 var _asyncToGenerator = __webpack_require__(5);
 
-var _createClass = __webpack_require__(14);
+var _createClass = __webpack_require__(13);
 
 var _classCallCheck = __webpack_require__(2);
 
@@ -2366,7 +2365,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var http = __webpack_require__(15);
+var http = __webpack_require__(14);
 
 var https = __webpack_require__(18);
 
@@ -3492,7 +3491,7 @@ var net = __webpack_require__(48);
 
 var tls = __webpack_require__(49);
 
-var http = __webpack_require__(15);
+var http = __webpack_require__(14);
 
 var https = __webpack_require__(18);
 
@@ -5333,7 +5332,7 @@ var classCallCheck = __webpack_require__(2);
 var classCallCheck_default = /*#__PURE__*/__webpack_require__.n(classCallCheck);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/createClass.js
-var createClass = __webpack_require__(14);
+var createClass = __webpack_require__(13);
 var createClass_default = /*#__PURE__*/__webpack_require__.n(createClass);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/typeof.js
@@ -5840,7 +5839,7 @@ function is_plain_object_isPlainObject(o) {
 var external_stream_ = __webpack_require__(3);
 
 // EXTERNAL MODULE: external "http"
-var external_http_ = __webpack_require__(15);
+var external_http_ = __webpack_require__(14);
 
 // EXTERNAL MODULE: external "url"
 var external_url_ = __webpack_require__(20);

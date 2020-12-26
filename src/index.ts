@@ -6,7 +6,6 @@ async function run(): Promise<void> {
   try {
     const githubToken: string = getInput('github-token', { required: true });
     const jsonFilePath: string = getInput('json-file-path', { required: true });
-    logInfo(`jsonFilePath: ${jsonFilePath}`);
     const fileContent = await fs.readFile(jsonFilePath, 'utf8');
     const annotations = JSON.parse(fileContent);
     const octokit = getOctokit(githubToken);
@@ -20,7 +19,7 @@ async function run(): Promise<void> {
     }
     // const owner = githubContext.repo.owner;
     // const repo = githubContext.repo.repo;
-    logInfo(`here: ${jsonFilePath} ${ref} ${annotations} ${octokit}`);
+    logInfo(`here: ${jsonFilePath} ${ref} ${JSON.stringify(annotations)} ${octokit}`);
   } catch (error) {
     setFailed(error.message);
   }
