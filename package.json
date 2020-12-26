@@ -25,6 +25,7 @@
   },
   "devDependencies": {
     "@kibalabs/build": "0.6.3-next.1",
+    "filemanager-webpack-plugin": "^3.0.0",
     "js-yaml": "^3.14.0"
   }
 }

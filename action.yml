@@ -21,4 +21,4 @@ inputs:
     default: true
 runs:
   using: 'node12'
-  main: 'dist/index.js'
+  main: 'runnable/index.js'
