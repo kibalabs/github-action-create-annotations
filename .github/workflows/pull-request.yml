@@ -3,8 +3,44 @@ on:
   pull_request:
     branches: [ main ]
 jobs:
-  # TODO(krishan711): add linting
   # TODO(krishan711): test that the dist folder is the same as what has been created here
+  build-package:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: .
+    env:
+      DOCKER_IMAGE: docker.pkg.github.com/${{ github.repository }}/github-action-create-annotations-build
+      DOCKER_TAG: ${{ github.sha }}
+    steps:
+    - name: Check out the repo
+      uses: actions/checkout@v2
+    - name: Login to GitHub Packages Docker Registry
+      run: echo ${{ secrets.GITHUB_TOKEN }} | docker login docker.pkg.github.com -u ${{ github.repository_owner }} --password-stdin
+    - name: Build docker image
+      run: docker build --tag $DOCKER_IMAGE:$DOCKER_TAG .
+    - name: Push to GitHub Packages
+      run: docker push $DOCKER_IMAGE:$DOCKER_TAG
+  lint-package:
+    needs: build-package
+    runs-on: ubuntu-latest
+    env:
+      DOCKER_IMAGE: docker.pkg.github.com/${{ github.repository }}/ui-react-build
+      DOCKER_TAG: ${{ github.sha }}
+    steps:
+    - name: Login to GitHub Packages Docker Registry
+      run: echo ${{ secrets.GITHUB_TOKEN }} | docker login docker.pkg.github.com -u ${{ github.repository_owner }} --password-stdin
+    - name: Pull docker image
+      run: docker pull $DOCKER_IMAGE:$DOCKER_TAG
+    - name: Run linting
+      run: |
+        docker run --name lint $DOCKER_IMAGE:$DOCKER_TAG npm run lint -- --output-file lint-results.json
+        docker cp lint:/app/lint-results.json ./lint-results.json
+    - name: Annotate Code Linting Results
+      uses: kibalabs/eslint-annotate-action@master
+      with:
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
+        report-json: lint-results.json
   run-action:
     runs-on: ubuntu-latest
     steps:

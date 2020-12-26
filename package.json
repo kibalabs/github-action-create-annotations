@@ -12,8 +12,7 @@
     "build": "build-module",
     "clean": "rm -rf ./node_modules ./package-lock.json ./dist",
     "lint": "lint",
-    "lint-fix": "lint --fix",
-    "package": "ncc build --source-map --license licenses.txt"
+    "lint-fix": "lint --fix"
   },
   "dependencies": {
     "@actions/core": "^1.2.6"
