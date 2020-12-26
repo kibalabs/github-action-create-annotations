@@ -1,3 +1,9 @@
 [
-  
+  {
+    "file": "runnable/index.js",
+    "line": 1,
+    "title": "Ignore this annotation",
+    "message": "It's just used as an example",
+    "annotation_level": "notice"
+  }
 ]

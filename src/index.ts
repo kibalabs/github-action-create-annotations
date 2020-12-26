@@ -1,5 +1,6 @@
 import { promises as fs } from 'fs';
-import { info as logInfo, getInput, setFailed } from '@actions/core';
+
+import { getInput, info as logInfo, setFailed } from '@actions/core';
 import { getOctokit, context as githubContext } from '@actions/github';
 
 async function run(): Promise<void> {
