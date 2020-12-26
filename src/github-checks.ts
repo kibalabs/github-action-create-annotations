@@ -4,7 +4,7 @@ import { GitHub } from '@actions/github';
 import { GitHubApiError, GitHubApiUnauthorizedError } from './github-exceptions';
 import { IAnnotation } from './model';
 
-export const createCheck = async (octokit: GitHub, owner: string, repo: string, title: string, ref: string): Promise<ICheck> => {
+export const createCheck = async (octokit: InstanceType<typeof GitHub>, owner: string, repo: string, title: string, ref: string): Promise<ICheck> => {
   logInfo(`Creating GitHub check in '${owner}/${repo}': ${title}}`);
   try {
     const check = await octokit.checks.create({
@@ -26,7 +26,7 @@ export const createCheck = async (octokit: GitHub, owner: string, repo: string, 
   }
 };
 
-export const updateCheck = async (octokit: GitHub, owner: string, repo: string, checkRunId: number, conclusion: string, title: string, summary: string, annotations: IAnnotation[]): Promise<void> => {
+export const updateCheck = async (octokit: InstanceType<typeof GitHub>, owner: string, repo: string, checkRunId: number, conclusion: string, title: string, summary: string, annotations: IAnnotation[]): Promise<void> => {
   logInfo(`Updating GitHub check in '${owner}/${repo}': ${title}`);
   try {
     await octokit.checks.update({
@@ -51,10 +51,11 @@ export interface ICheck {
   name: string;
 }
 
-export const listChecks = async (octokit: GitHub, owner: string, repo: string, ref: string): Promise<ICheck[]> => {
+export const listChecks = async (octokit: InstanceType<typeof GitHub>, owner: string, repo: string, ref: string): Promise<ICheck[]> => {
   logInfo(`Listing GitHub checks in '${owner}/${repo}:${ref}'`);
   try {
     const checks = await octokit.checks.listForRef({owner, repo, ref});
+    logInfo(`checks: ${JSON.stringify(checks)}`);
     return checks.checkRuns.map((checkRun: object): ICheck => {
       return {
         id: checkRun.id,

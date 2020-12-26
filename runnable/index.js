@@ -197,7 +197,7 @@ module.exports = _inherits;
 
 var _typeof = __webpack_require__(14);
 
-var assertThisInitialized = __webpack_require__(7);
+var assertThisInitialized = __webpack_require__(8);
 
 function _possibleConstructorReturn(self, call) {
   if (call && (_typeof(call) === "object" || typeof call === "function")) {
@@ -211,26 +211,6 @@ module.exports = _possibleConstructorReturn;
 
 /***/ }),
 /* 6 */
-/***/ (function(module, exports) {
-
-module.exports = require("stream");
-
-/***/ }),
-/* 7 */
-/***/ (function(module, exports) {
-
-function _assertThisInitialized(self) {
-  if (self === void 0) {
-    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-  }
-
-  return self;
-}
-
-module.exports = _assertThisInitialized;
-
-/***/ }),
-/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -575,73 +555,27 @@ function getState(name) {
 exports.getState = getState;
 
 /***/ }),
+/* 7 */
+/***/ (function(module, exports) {
+
+module.exports = require("stream");
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports) {
+
+function _assertThisInitialized(self) {
+  if (self === void 0) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }
+
+  return self;
+}
+
+module.exports = _assertThisInitialized;
+
+/***/ }),
 /* 9 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var getPrototypeOf = __webpack_require__(1);
-
-var setPrototypeOf = __webpack_require__(22);
-
-var isNativeFunction = __webpack_require__(41);
-
-var construct = __webpack_require__(42);
-
-function _wrapNativeSuper(Class) {
-  var _cache = typeof Map === "function" ? new Map() : undefined;
-
-  module.exports = _wrapNativeSuper = function _wrapNativeSuper(Class) {
-    if (Class === null || !isNativeFunction(Class)) return Class;
-
-    if (typeof Class !== "function") {
-      throw new TypeError("Super expression must either be null or a function");
-    }
-
-    if (typeof _cache !== "undefined") {
-      if (_cache.has(Class)) return _cache.get(Class);
-
-      _cache.set(Class, Wrapper);
-    }
-
-    function Wrapper() {
-      return construct(Class, arguments, getPrototypeOf(this).constructor);
-    }
-
-    Wrapper.prototype = Object.create(Class.prototype, {
-      constructor: {
-        value: Wrapper,
-        enumerable: false,
-        writable: true,
-        configurable: true
-      }
-    });
-    return setPrototypeOf(Wrapper, Class);
-  };
-
-  return _wrapNativeSuper(Class);
-}
-
-module.exports = _wrapNativeSuper;
-
-/***/ }),
-/* 10 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var arrayWithHoles = __webpack_require__(33);
-
-var iterableToArrayLimit = __webpack_require__(34);
-
-var unsupportedIterableToArray = __webpack_require__(35);
-
-var nonIterableRest = __webpack_require__(37);
-
-function _slicedToArray(arr, i) {
-  return arrayWithHoles(arr) || iterableToArrayLimit(arr, i) || unsupportedIterableToArray(arr, i) || nonIterableRest();
-}
-
-module.exports = _slicedToArray;
-
-/***/ }),
-/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -703,6 +637,72 @@ function getOctokit(token, options) {
 }
 
 exports.getOctokit = getOctokit;
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var getPrototypeOf = __webpack_require__(1);
+
+var setPrototypeOf = __webpack_require__(22);
+
+var isNativeFunction = __webpack_require__(41);
+
+var construct = __webpack_require__(42);
+
+function _wrapNativeSuper(Class) {
+  var _cache = typeof Map === "function" ? new Map() : undefined;
+
+  module.exports = _wrapNativeSuper = function _wrapNativeSuper(Class) {
+    if (Class === null || !isNativeFunction(Class)) return Class;
+
+    if (typeof Class !== "function") {
+      throw new TypeError("Super expression must either be null or a function");
+    }
+
+    if (typeof _cache !== "undefined") {
+      if (_cache.has(Class)) return _cache.get(Class);
+
+      _cache.set(Class, Wrapper);
+    }
+
+    function Wrapper() {
+      return construct(Class, arguments, getPrototypeOf(this).constructor);
+    }
+
+    Wrapper.prototype = Object.create(Class.prototype, {
+      constructor: {
+        value: Wrapper,
+        enumerable: false,
+        writable: true,
+        configurable: true
+      }
+    });
+    return setPrototypeOf(Wrapper, Class);
+  };
+
+  return _wrapNativeSuper(Class);
+}
+
+module.exports = _wrapNativeSuper;
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var arrayWithHoles = __webpack_require__(33);
+
+var iterableToArrayLimit = __webpack_require__(34);
+
+var unsupportedIterableToArray = __webpack_require__(35);
+
+var nonIterableRest = __webpack_require__(37);
+
+function _slicedToArray(arr, i) {
+  return arrayWithHoles(arr) || iterableToArrayLimit(arr, i) || unsupportedIterableToArray(arr, i) || nonIterableRest();
+}
+
+module.exports = _slicedToArray;
 
 /***/ }),
 /* 12 */
@@ -856,7 +856,7 @@ module.exports = _setPrototypeOf;
 "use strict";
 
 
-var _slicedToArray = __webpack_require__(10);
+var _slicedToArray = __webpack_require__(11);
 
 var _classCallCheck = __webpack_require__(2);
 
@@ -2269,7 +2269,7 @@ var _createClass = __webpack_require__(15);
 
 var _classCallCheck = __webpack_require__(2);
 
-var _assertThisInitialized = __webpack_require__(7);
+var _assertThisInitialized = __webpack_require__(8);
 
 var _inherits = __webpack_require__(4);
 
@@ -2277,7 +2277,7 @@ var _possibleConstructorReturn = __webpack_require__(5);
 
 var _getPrototypeOf = __webpack_require__(1);
 
-var _wrapNativeSuper = __webpack_require__(9);
+var _wrapNativeSuper = __webpack_require__(10);
 
 function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
@@ -3888,7 +3888,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "restEndpointMethods", function() { return restEndpointMethods; });
 /* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(12);
 /* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(10);
+/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(11);
 /* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1__);
 
 
@@ -5281,7 +5281,7 @@ function getUserAgent() {
 var before_after_hook = __webpack_require__(25);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/slicedToArray.js
-var slicedToArray = __webpack_require__(10);
+var slicedToArray = __webpack_require__(11);
 var slicedToArray_default = /*#__PURE__*/__webpack_require__.n(slicedToArray);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/defineProperty.js
@@ -5758,7 +5758,7 @@ function is_plain_object_isPlainObject(o) {
 
 
 // EXTERNAL MODULE: external "stream"
-var external_stream_ = __webpack_require__(6);
+var external_stream_ = __webpack_require__(7);
 
 // EXTERNAL MODULE: external "http"
 var external_http_ = __webpack_require__(16);
@@ -7413,11 +7413,11 @@ lib_fetch.Promise = global.Promise;
 
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/assertThisInitialized.js
-var assertThisInitialized = __webpack_require__(7);
+var assertThisInitialized = __webpack_require__(8);
 var assertThisInitialized_default = /*#__PURE__*/__webpack_require__.n(assertThisInitialized);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/wrapNativeSuper.js
-var wrapNativeSuper = __webpack_require__(9);
+var wrapNativeSuper = __webpack_require__(10);
 var wrapNativeSuper_default = /*#__PURE__*/__webpack_require__.n(wrapNativeSuper);
 
 // CONCATENATED MODULE: ./node_modules/deprecation/dist-web/index.js
@@ -8125,10 +8125,10 @@ var asyncToGenerator_default = /*#__PURE__*/__webpack_require__.n(asyncToGenerat
 var external_fs_ = __webpack_require__(18);
 
 // EXTERNAL MODULE: ./node_modules/@actions/core/lib/core.js
-var core = __webpack_require__(8);
+var core = __webpack_require__(6);
 
 // EXTERNAL MODULE: ./node_modules/@actions/github/lib/github.js
-var github = __webpack_require__(11);
+var github = __webpack_require__(9);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/classCallCheck.js
 var classCallCheck = __webpack_require__(2);
@@ -8147,7 +8147,7 @@ var getPrototypeOf = __webpack_require__(1);
 var getPrototypeOf_default = /*#__PURE__*/__webpack_require__.n(getPrototypeOf);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/wrapNativeSuper.js
-var wrapNativeSuper = __webpack_require__(9);
+var wrapNativeSuper = __webpack_require__(10);
 var wrapNativeSuper_default = /*#__PURE__*/__webpack_require__.n(wrapNativeSuper);
 
 // CONCATENATED MODULE: ./src/github-exceptions.ts
@@ -8221,7 +8221,10 @@ var createCheck = /*#__PURE__*/function () {
 
           case 4:
             check = _context.sent;
-            return _context.abrupt("return", check.data.id);
+            return _context.abrupt("return", {
+              id: check.data.id,
+              name: check.data.name
+            });
 
           case 8:
             _context.prev = 8;
@@ -8310,25 +8313,25 @@ var listChecks = /*#__PURE__*/function () {
 
           case 4:
             checks = _context3.sent;
-            return _context3.abrupt("return", checks.data.checkRuns.map(function (checkRun) {
+            Object(core["info"])("checks: ".concat(JSON.stringify(checks)));
+            return _context3.abrupt("return", checks.checkRuns.map(function (checkRun) {
               return {
                 id: checkRun.id,
-                name: checkRun.name,
-                status: checkRun.status
+                name: checkRun.name
               };
             }));
 
-          case 8:
-            _context3.prev = 8;
+          case 9:
+            _context3.prev = 9;
             _context3.t0 = _context3["catch"](1);
             throw new github_exceptions_GitHubApiError("Unable to list checks for '".concat(owner, "/").concat(repo, ":").concat(ref, "'. Details: ").concat(_context3.t0));
 
-          case 11:
+          case 12:
           case "end":
             return _context3.stop();
         }
       }
-    }, _callee3, null, [[1, 8]]);
+    }, _callee3, null, [[1, 9]]);
   }));
 
   return function listChecks(_x14, _x15, _x16, _x17) {
@@ -8391,7 +8394,7 @@ function run() {
 
 function _run() {
   _run = asyncToGenerator_default()( /*#__PURE__*/regenerator_default.a.mark(function _callee() {
-    var githubToken, jsonFilePath, fileContent, annotations, octokit, pullRequest, ref, checks, failureCount, warningCount, noticeCount, summary, conclusion, checkRunId, chunkSize, index, annotationsBatch;
+    var githubToken, jsonFilePath, fileContent, annotations, octokit, pullRequest, ref, failureCount, warningCount, noticeCount, summary, conclusion, currentChecks, currentCheck, chunkSize, index, annotationsBatch;
     return regenerator_default.a.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
@@ -8418,12 +8421,6 @@ function _run() {
               ref = github["context"].sha;
             }
 
-            _context.next = 12;
-            return listChecks(octokit, github["context"].repo.owner, github["context"].repo.repo, ref);
-
-          case 12:
-            checks = _context.sent;
-            Object(core["info"])("output: ".concat(JSON.stringify(checks)));
             failureCount = annotations.filter(function (annotation) {
               return annotation.annotation_level === ANNOTATION_LEVEL_FAILURE;
             }).length;
@@ -8437,14 +8434,34 @@ function _run() {
             conclusion = generateConclusion(failureCount, warningCount, noticeCount);
             Object(core["info"])("Summary: ".concat(summary));
             Object(core["info"])("Conclusion: ".concat(conclusion));
-            checkRunId = github["context"].runId; // const checkRunId = await createCheck(octokit, githubContext.repo.owner, githubContext.repo.repo, title, ref);
+            _context.next = 19;
+            return listChecks(octokit, github["context"].repo.owner, github["context"].repo.repo, ref);
 
+          case 19:
+            currentChecks = _context.sent;
+            currentCheck = currentChecks.find(function (currentCheck) {
+              return currentCheck.name === github["context"].job;
+            });
+            Object(core["info"])("currentCheck: ".concat(JSON.stringify(currentCheck)));
+
+            if (currentCheck) {
+              _context.next = 26;
+              break;
+            }
+
+            _context.next = 25;
+            return createCheck(octokit, github["context"].repo.owner, github["context"].repo.repo, title, ref);
+
+          case 25:
+            currentCheck = _context.sent;
+
+          case 26:
             chunkSize = 50;
             index = 0;
 
-          case 24:
+          case 28:
             if (!(index < annotations.length)) {
-              _context.next = 31;
+              _context.next = 35;
               break;
             }
 
@@ -8453,29 +8470,29 @@ function _run() {
                 end_line: annotation.end_line || annotation.start_line
               });
             });
-            _context.next = 28;
-            return updateCheck(octokit, github["context"].repo.owner, github["context"].repo.repo, checkRunId, conclusion, github["context"].job, summary, annotationsBatch);
+            _context.next = 32;
+            return updateCheck(octokit, github["context"].repo.owner, github["context"].repo.repo, currentCheck.id, conclusion, currentCheck.name, summary, annotationsBatch);
 
-          case 28:
+          case 32:
             index += chunkSize;
-            _context.next = 24;
+            _context.next = 28;
             break;
 
-          case 31:
-            _context.next = 36;
+          case 35:
+            _context.next = 40;
             break;
 
-          case 33:
-            _context.prev = 33;
+          case 37:
+            _context.prev = 37;
             _context.t0 = _context["catch"](0);
             Object(core["setFailed"])(_context.t0.message);
 
-          case 36:
+          case 40:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, null, [[0, 33]]);
+    }, _callee, null, [[0, 37]]);
   }));
   return _run.apply(this, arguments);
 }
