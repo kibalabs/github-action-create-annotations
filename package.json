@@ -1,19 +1,25 @@
 {
   "name": "@kibalabs/github-action-create-annotations",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "description": "GitHub Action",
   "license": "MIT",
-  "main": "dist/index.js",
+  "private": true,
   "repository": {
     "type": "git",
     "url": "https://github.com/kibalabs/github-action-create-annotations.git"
   },
+  "bugs": "https://github.com/kibalabs/github-action-create-annotations/issues",
   "scripts": {
-    "build": "build-module",
+    "build": "build-module --webpack-config-modifier ./webpack-config-modifier.js",
     "clean": "rm -rf ./node_modules ./package-lock.json ./dist",
     "lint": "lint",
     "lint-fix": "lint --fix"
   },
+  "files": [
+    "dist/*"
+  ],
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "dependencies": {
     "@actions/core": "^1.2.6"
   },
