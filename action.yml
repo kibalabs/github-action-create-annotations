@@ -11,6 +11,10 @@ inputs:
   json-file-path:
     description: 'Path to a JSON file which contains a list of annotations.'
     required: true
+  fail-on-error:
+    description: 'Set if the action should end with an error exit code if there are any failure annotations'
+    required: false
+    default: true
 runs:
   using: 'node12'
   main: 'runnable/index.js'

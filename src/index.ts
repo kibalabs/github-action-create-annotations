@@ -1,6 +1,6 @@
 import { promises as fs } from 'fs';
 
-import { getInput, info as logInfo, setFailed } from '@actions/core';
+import { ExitCode, getInput, info as logInfo, setFailed } from '@actions/core';
 import { getOctokit, context as githubContext } from '@actions/github';
 
 import { createCheck, ICheck, listChecks, updateCheck } from './github-checks';
@@ -34,6 +34,7 @@ async function run(): Promise<void> {
   try {
     const githubToken: string = getInput('github-token', { required: true });
     const jsonFilePath: string = getInput('json-file-path', { required: true });
+    const failOnError: boolean = /^(true|1)$/.test(getInput('fail-on-error', { required: false }));
     const fileContent = await fs.readFile(jsonFilePath, 'utf8');
     const annotations = JSON.parse(fileContent) as IAnnotation[];
     const octokit = getOctokit(githubToken);
@@ -60,6 +61,9 @@ async function run(): Promise<void> {
       updatePromises.push(updateCheck(octokit, githubContext.repo.owner, githubContext.repo.repo, currentCheck.id, conclusion, currentCheck.name, summary, annotationsBatch));
     }
     await Promise.all(updatePromises);
+    if (failOnError && failureCount > 0) {
+      process.exitCode = ExitCode.Failure
+    }
   } catch (error) {
     setFailed(error.message);
   }
