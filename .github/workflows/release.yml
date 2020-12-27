@@ -1,0 +1,35 @@
+name: Release
+on:
+  push:
+    tags: [ 'v*' ]
+jobs:
+  deploy-package:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: .
+    env:
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+    steps:
+    - name: Check out the repo
+      uses: actions/checkout@v2
+    - name: Build docker image
+      run: docker build --tag package .
+    # - name: Create .npmrc file
+    #   run: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
+    # - name: Publish package to npm
+    #   run: docker run -v $(pwd)/.npmrc:/root/.npmrc package npm publish
+  create-release:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v2
+      - name: Create Release
+        uses: actions/create-release@v1
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
