@@ -11,6 +11,12 @@ export interface IAnnotation {
   annotation_level: string;
 }
 
+export interface IResult {
+  noticeCount: number;
+  warningCount: number;
+  failureCount: number;
+}
+
 export const ANNOTATION_LEVEL_NOTICE = 'notice';
 export const ANNOTATION_LEVEL_WARNING = 'warning';
 export const ANNOTATION_LEVEL_FAILURE = 'failure';
