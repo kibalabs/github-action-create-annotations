@@ -56,8 +56,7 @@ jobs:
         docker create --name container $DOCKER_IMAGE:$DOCKER_TAG
         docker cp container:/app/runnable/index.js ./runnable.js
     - name: Check the runnable
-      # TODO(krishan711): test that the dist folder is the same as what has been created here
-      run: exit 1
+      run: cmp ./runnable/index.js ./runnable.js
   run-action:
     runs-on: ubuntu-latest
     steps:
