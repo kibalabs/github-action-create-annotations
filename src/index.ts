@@ -56,12 +56,7 @@ async function run(): Promise<void> {
     const updatePromises = [];
     const chunkSize = 50;
     for (let index = 0; index < annotations.length; index += chunkSize) {
-      const annotationsBatch = annotations.slice(index, index + chunkSize).map((annotation: IAnnotation): IAnnotation => {
-        return {
-          ...annotation,
-          end_line: annotation.end_line || annotation.start_line,
-        };
-      });
+      const annotationsBatch = annotations.slice(index, index + chunkSize);
       updatePromises.push(updateCheck(octokit, githubContext.repo.owner, githubContext.repo.repo, currentCheck.id, conclusion, currentCheck.name, summary, annotationsBatch));
     }
     await Promise.all(updatePromises);

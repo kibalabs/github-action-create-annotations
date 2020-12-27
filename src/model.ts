@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 
 export interface IAnnotation {
-  file: string;
+  path: string;
   start_line: string;
   end_line?: string;
   start_column?: string;
