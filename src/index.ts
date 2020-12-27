@@ -30,7 +30,7 @@ const generateConclusion = (failureCount: number, warningCount: number, noticeCo
   return 'success';
 };
 
-const processAnnotations = async (annotations: IAnnotation[], octokit: GitHub): Promise<IResult> => {
+const processAnnotations = async (annotations: IAnnotation[], checkName: string, octokit: GitHub): Promise<IResult> => {
   const failureCount = annotations.filter((annotation: IAnnotation): boolean => annotation.annotation_level === ANNOTATION_LEVEL_FAILURE).length;
   const warningCount = annotations.filter((annotation: IAnnotation): boolean => annotation.annotation_level === ANNOTATION_LEVEL_WARNING).length;
   const noticeCount = annotations.filter((annotation: IAnnotation): boolean => annotation.annotation_level === ANNOTATION_LEVEL_NOTICE).length;
@@ -41,9 +41,9 @@ const processAnnotations = async (annotations: IAnnotation[], octokit: GitHub): 
 
   const ref = githubContext.payload.pull_request ? githubContext.payload.pull_request.head.sha : githubContext.sha;
   const currentChecks = await listChecks(octokit, githubContext.repo.owner, githubContext.repo.repo, ref);
-  let currentCheck = currentChecks.find((check: ICheck): boolean => check.name === githubContext.job);
+  let currentCheck = currentChecks.find((check: ICheck): boolean => check.name === checkName);
   if (!currentCheck) {
-    currentCheck = await createCheck(octokit, githubContext.repo.owner, githubContext.repo.repo, githubContext.job, ref);
+    currentCheck = await createCheck(octokit, githubContext.repo.owner, githubContext.repo.repo, checkName, ref);
   }
 
   const updatePromises = [];
@@ -51,6 +51,10 @@ const processAnnotations = async (annotations: IAnnotation[], octokit: GitHub): 
   for (let index = 0; index < annotations.length; index += chunkSize) {
     const annotationsBatch = annotations.slice(index, index + chunkSize);
     updatePromises.push(updateCheck(octokit, githubContext.repo.owner, githubContext.repo.repo, currentCheck.id, conclusion, currentCheck.name, summary, annotationsBatch));
+  }
+  // TODO(krishan711): the above won't run if there are no annotations, figure out how to clean this up.
+  if (annotations.length === 0) {
+    updatePromises.push(updateCheck(octokit, githubContext.repo.owner, githubContext.repo.repo, currentCheck.id, conclusion, currentCheck.name, summary, []));
   }
   await Promise.all(updatePromises);
   return { failureCount, warningCount, noticeCount };
@@ -61,11 +65,12 @@ async function run(): Promise<void> {
     const githubToken: string = getInput('github-token', { required: true });
     const jsonFilePath: string = getInput('json-file-path', { required: true });
     const failOnError: boolean = /^(true|1)$/.test(getInput('fail-on-error', { required: false }));
+    const checkName: string = getInput('check-name', { required: false }) || githubContext.job;
     const fileContent = await fs.readFile(jsonFilePath, 'utf8');
     const annotations = JSON.parse(fileContent) as IAnnotation[];
     const octokit = getOctokit(githubToken);
 
-    const result = await processAnnotations(annotations, octokit);
+    const result = await processAnnotations(annotations, checkName, octokit);
     if (failOnError && result.failureCount > 0) {
       process.exitCode = ExitCode.Failure;
     }
