@@ -261,7 +261,7 @@ exports.getOctokit = getOctokit;
 
 var _typeof = __webpack_require__(13);
 
-var assertThisInitialized = __webpack_require__(8);
+var assertThisInitialized = __webpack_require__(9);
 
 function _possibleConstructorReturn(self, call) {
   if (call && (_typeof(call) === "object" || typeof call === "function")) {
@@ -275,92 +275,6 @@ module.exports = _possibleConstructorReturn;
 
 /***/ }),
 /* 7 */
-/***/ (function(module, exports) {
-
-module.exports = require("stream");
-
-/***/ }),
-/* 8 */
-/***/ (function(module, exports) {
-
-function _assertThisInitialized(self) {
-  if (self === void 0) {
-    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-  }
-
-  return self;
-}
-
-module.exports = _assertThisInitialized;
-
-/***/ }),
-/* 9 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var getPrototypeOf = __webpack_require__(1);
-
-var setPrototypeOf = __webpack_require__(22);
-
-var isNativeFunction = __webpack_require__(41);
-
-var construct = __webpack_require__(42);
-
-function _wrapNativeSuper(Class) {
-  var _cache = typeof Map === "function" ? new Map() : undefined;
-
-  module.exports = _wrapNativeSuper = function _wrapNativeSuper(Class) {
-    if (Class === null || !isNativeFunction(Class)) return Class;
-
-    if (typeof Class !== "function") {
-      throw new TypeError("Super expression must either be null or a function");
-    }
-
-    if (typeof _cache !== "undefined") {
-      if (_cache.has(Class)) return _cache.get(Class);
-
-      _cache.set(Class, Wrapper);
-    }
-
-    function Wrapper() {
-      return construct(Class, arguments, getPrototypeOf(this).constructor);
-    }
-
-    Wrapper.prototype = Object.create(Class.prototype, {
-      constructor: {
-        value: Wrapper,
-        enumerable: false,
-        writable: true,
-        configurable: true
-      }
-    });
-    return setPrototypeOf(Wrapper, Class);
-  };
-
-  return _wrapNativeSuper(Class);
-}
-
-module.exports = _wrapNativeSuper;
-
-/***/ }),
-/* 10 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var arrayWithHoles = __webpack_require__(33);
-
-var iterableToArrayLimit = __webpack_require__(34);
-
-var unsupportedIterableToArray = __webpack_require__(35);
-
-var nonIterableRest = __webpack_require__(37);
-
-function _slicedToArray(arr, i) {
-  return arrayWithHoles(arr) || iterableToArrayLimit(arr, i) || unsupportedIterableToArray(arr, i) || nonIterableRest();
-}
-
-module.exports = _slicedToArray;
-
-/***/ }),
-/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -705,6 +619,92 @@ function getState(name) {
 exports.getState = getState;
 
 /***/ }),
+/* 8 */
+/***/ (function(module, exports) {
+
+module.exports = require("stream");
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports) {
+
+function _assertThisInitialized(self) {
+  if (self === void 0) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }
+
+  return self;
+}
+
+module.exports = _assertThisInitialized;
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var getPrototypeOf = __webpack_require__(1);
+
+var setPrototypeOf = __webpack_require__(22);
+
+var isNativeFunction = __webpack_require__(41);
+
+var construct = __webpack_require__(42);
+
+function _wrapNativeSuper(Class) {
+  var _cache = typeof Map === "function" ? new Map() : undefined;
+
+  module.exports = _wrapNativeSuper = function _wrapNativeSuper(Class) {
+    if (Class === null || !isNativeFunction(Class)) return Class;
+
+    if (typeof Class !== "function") {
+      throw new TypeError("Super expression must either be null or a function");
+    }
+
+    if (typeof _cache !== "undefined") {
+      if (_cache.has(Class)) return _cache.get(Class);
+
+      _cache.set(Class, Wrapper);
+    }
+
+    function Wrapper() {
+      return construct(Class, arguments, getPrototypeOf(this).constructor);
+    }
+
+    Wrapper.prototype = Object.create(Class.prototype, {
+      constructor: {
+        value: Wrapper,
+        enumerable: false,
+        writable: true,
+        configurable: true
+      }
+    });
+    return setPrototypeOf(Wrapper, Class);
+  };
+
+  return _wrapNativeSuper(Class);
+}
+
+module.exports = _wrapNativeSuper;
+
+/***/ }),
+/* 11 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var arrayWithHoles = __webpack_require__(33);
+
+var iterableToArrayLimit = __webpack_require__(34);
+
+var unsupportedIterableToArray = __webpack_require__(35);
+
+var nonIterableRest = __webpack_require__(37);
+
+function _slicedToArray(arr, i) {
+  return arrayWithHoles(arr) || iterableToArrayLimit(arr, i) || unsupportedIterableToArray(arr, i) || nonIterableRest();
+}
+
+module.exports = _slicedToArray;
+
+/***/ }),
 /* 12 */
 /***/ (function(module, exports) {
 
@@ -856,7 +856,7 @@ module.exports = _setPrototypeOf;
 "use strict";
 
 
-var _slicedToArray = __webpack_require__(10);
+var _slicedToArray = __webpack_require__(11);
 
 var _classCallCheck = __webpack_require__(2);
 
@@ -2269,7 +2269,7 @@ var _createClass = __webpack_require__(15);
 
 var _classCallCheck = __webpack_require__(2);
 
-var _assertThisInitialized = __webpack_require__(8);
+var _assertThisInitialized = __webpack_require__(9);
 
 var _inherits = __webpack_require__(4);
 
@@ -2277,7 +2277,7 @@ var _possibleConstructorReturn = __webpack_require__(6);
 
 var _getPrototypeOf = __webpack_require__(1);
 
-var _wrapNativeSuper = __webpack_require__(9);
+var _wrapNativeSuper = __webpack_require__(10);
 
 function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
 
@@ -3888,7 +3888,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "restEndpointMethods", function() { return restEndpointMethods; });
 /* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(14);
 /* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(10);
+/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(11);
 /* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1__);
 
 
@@ -5281,7 +5281,7 @@ function getUserAgent() {
 var before_after_hook = __webpack_require__(25);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/slicedToArray.js
-var slicedToArray = __webpack_require__(10);
+var slicedToArray = __webpack_require__(11);
 var slicedToArray_default = /*#__PURE__*/__webpack_require__.n(slicedToArray);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/defineProperty.js
@@ -5758,7 +5758,7 @@ function is_plain_object_isPlainObject(o) {
 
 
 // EXTERNAL MODULE: external "stream"
-var external_stream_ = __webpack_require__(7);
+var external_stream_ = __webpack_require__(8);
 
 // EXTERNAL MODULE: external "http"
 var external_http_ = __webpack_require__(16);
@@ -7413,11 +7413,11 @@ lib_fetch.Promise = global.Promise;
 
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/assertThisInitialized.js
-var assertThisInitialized = __webpack_require__(8);
+var assertThisInitialized = __webpack_require__(9);
 var assertThisInitialized_default = /*#__PURE__*/__webpack_require__.n(assertThisInitialized);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/wrapNativeSuper.js
-var wrapNativeSuper = __webpack_require__(9);
+var wrapNativeSuper = __webpack_require__(10);
 var wrapNativeSuper_default = /*#__PURE__*/__webpack_require__.n(wrapNativeSuper);
 
 // CONCATENATED MODULE: ./node_modules/deprecation/dist-web/index.js
@@ -8121,7 +8121,7 @@ var asyncToGenerator_default = /*#__PURE__*/__webpack_require__.n(asyncToGenerat
 var external_fs_ = __webpack_require__(18);
 
 // EXTERNAL MODULE: ./node_modules/@actions/core/lib/core.js
-var core = __webpack_require__(11);
+var core = __webpack_require__(7);
 
 // EXTERNAL MODULE: ./node_modules/@actions/github/lib/github.js
 var github = __webpack_require__(5);
@@ -8143,7 +8143,7 @@ var getPrototypeOf = __webpack_require__(1);
 var getPrototypeOf_default = /*#__PURE__*/__webpack_require__.n(getPrototypeOf);
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/wrapNativeSuper.js
-var wrapNativeSuper = __webpack_require__(9);
+var wrapNativeSuper = __webpack_require__(10);
 var wrapNativeSuper_default = /*#__PURE__*/__webpack_require__.n(wrapNativeSuper);
 
 // CONCATENATED MODULE: ./src/github-exceptions.ts
@@ -8383,7 +8383,7 @@ function run() {
 
 function _run() {
   _run = asyncToGenerator_default()( /*#__PURE__*/regenerator_default.a.mark(function _callee() {
-    var githubToken, jsonFilePath, fileContent, annotations, octokit, failureCount, warningCount, noticeCount, summary, conclusion, ref, currentChecks, currentCheck, updatePromises, chunkSize, index, annotationsBatch;
+    var githubToken, jsonFilePath, failOnError, fileContent, annotations, octokit, failureCount, warningCount, noticeCount, summary, conclusion, ref, currentChecks, currentCheck, updatePromises, chunkSize, index, annotationsBatch;
     return regenerator_default.a.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
@@ -8395,10 +8395,13 @@ function _run() {
             jsonFilePath = Object(core["getInput"])('json-file-path', {
               required: true
             });
-            _context.next = 5;
+            failOnError = /^(true|1)$/.test(Object(core["getInput"])('fail-on-error', {
+              required: false
+            }));
+            _context.next = 6;
             return external_fs_["promises"].readFile(jsonFilePath, 'utf8');
 
-          case 5:
+          case 6:
             fileContent = _context.sent;
             annotations = JSON.parse(fileContent);
             octokit = Object(github["getOctokit"])(githubToken);
@@ -8416,27 +8419,27 @@ function _run() {
             Object(core["info"])("Summary: ".concat(summary));
             Object(core["info"])("Conclusion: ".concat(conclusion));
             ref = github["context"].payload.pull_request ? github["context"].payload.pull_request.head.sha : github["context"].sha;
-            _context.next = 18;
+            _context.next = 19;
             return listChecks(octokit, github["context"].repo.owner, github["context"].repo.repo, ref);
 
-          case 18:
+          case 19:
             currentChecks = _context.sent;
             currentCheck = currentChecks.find(function (check) {
               return check.name === github["context"].job;
             });
 
             if (currentCheck) {
-              _context.next = 24;
+              _context.next = 25;
               break;
             }
 
-            _context.next = 23;
+            _context.next = 24;
             return createCheck(octokit, github["context"].repo.owner, github["context"].repo.repo, github["context"].job, ref);
 
-          case 23:
+          case 24:
             currentCheck = _context.sent;
 
-          case 24:
+          case 25:
             updatePromises = [];
             chunkSize = 50;
 
@@ -8445,24 +8448,28 @@ function _run() {
               updatePromises.push(updateCheck(octokit, github["context"].repo.owner, github["context"].repo.repo, currentCheck.id, conclusion, currentCheck.name, summary, annotationsBatch));
             }
 
-            _context.next = 29;
+            _context.next = 30;
             return Promise.all(updatePromises);
 
-          case 29:
-            _context.next = 34;
+          case 30:
+            if (failOnError && failureCount > 0) {
+              process.exitCode = core["ExitCode"].Failure;
+            }
+
+            _context.next = 36;
             break;
 
-          case 31:
-            _context.prev = 31;
+          case 33:
+            _context.prev = 33;
             _context.t0 = _context["catch"](0);
             Object(core["setFailed"])(_context.t0.message);
 
-          case 34:
+          case 36:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, null, [[0, 31]]);
+    }, _callee, null, [[0, 33]]);
   }));
   return _run.apply(this, arguments);
 }
