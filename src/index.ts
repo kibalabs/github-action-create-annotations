@@ -1,10 +1,10 @@
 import { promises as fs } from 'fs';
 
 import { ExitCode, getInput, info as logInfo, setFailed } from '@actions/core';
-import { GitHub, getOctokit, context as githubContext } from '@actions/github';
+import { getOctokit, GitHub, context as githubContext } from '@actions/github';
 
 import { createCheck, ICheck, listChecks, updateCheck } from './github-checks';
-import { ANNOTATION_LEVEL_FAILURE, ANNOTATION_LEVEL_NOTICE, ANNOTATION_LEVEL_WARNING, IAnnotation } from './model';
+import { ANNOTATION_LEVEL_FAILURE, ANNOTATION_LEVEL_NOTICE, ANNOTATION_LEVEL_WARNING, IAnnotation, IResult } from './model';
 
 const generateSummary = (failureCount: number, warningCount: number, noticeCount: number): string => {
   const messages = [];
@@ -54,7 +54,7 @@ const processAnnotations = async (annotations: IAnnotation[], octokit: GitHub): 
   }
   await Promise.all(updatePromises);
   return { failureCount, warningCount, noticeCount };
-}
+};
 
 async function run(): Promise<void> {
   try {
