@@ -62,7 +62,7 @@ async function run(): Promise<void> {
     }
     await Promise.all(updatePromises);
     if (failOnError && failureCount > 0) {
-      process.exitCode = ExitCode.Failure
+      process.exitCode = ExitCode.Failure;
     }
   } catch (error) {
     setFailed(error.message);
