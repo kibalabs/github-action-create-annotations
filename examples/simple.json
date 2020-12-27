@@ -7,6 +7,6 @@
     "end_column": 1,
     "title": "Ignore this annotation",
     "message": "It's just used as an example",
-    "annotation_level": "notice"
+    "annotation_level": "failure"
   }
 ]
