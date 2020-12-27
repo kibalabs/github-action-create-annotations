@@ -9,7 +9,6 @@ module.exports = (config) => {
   config.optimization = {
     ...(config.optimization || {}),
     usedExports: true,
-    minimize: false,
   };
   config.plugins = [
     ...(config.plugins || []),
