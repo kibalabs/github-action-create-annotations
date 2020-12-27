@@ -9,13 +9,13 @@ jobs:
       run:
         working-directory: .
     env:
-      DOCKER_IMAGE: ghcr.io/${{ github.repository }}/github-action-create-annotations-build
+      DOCKER_IMAGE: docker.pkg.github.com/${{ github.repository }}/github-action-create-annotations-build
       DOCKER_TAG: ${{ github.sha }}
     steps:
     - name: Check out the repo
       uses: actions/checkout@v2
     - name: Login to GitHub Packages Docker Registry
-      run: echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.repository_owner }} --password-stdin
+      run: echo ${{ secrets.GITHUB_TOKEN }} | docker login docker.pkg.github.com -u ${{ github.repository_owner }} --password-stdin
     - name: Build docker image
       run: docker build --tag $DOCKER_IMAGE:$DOCKER_TAG .
     - name: Push to GitHub Packages
@@ -24,11 +24,11 @@ jobs:
     needs: build-package
     runs-on: ubuntu-latest
     env:
-      DOCKER_IMAGE: ghcr.io/${{ github.repository }}/github-action-create-annotations-build
+      DOCKER_IMAGE: docker.pkg.github.com/${{ github.repository }}/github-action-create-annotations-build
       DOCKER_TAG: ${{ github.sha }}
     steps:
     - name: Login to GitHub Packages Docker Registry
-      run: echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.repository_owner }} --password-stdin
+      run: echo ${{ secrets.GITHUB_TOKEN }} | docker login docker.pkg.github.com -u ${{ github.repository_owner }} --password-stdin
     - name: Pull docker image
       run: docker pull $DOCKER_IMAGE:$DOCKER_TAG
     - name: Run linting
@@ -44,13 +44,13 @@ jobs:
     needs: build-package
     runs-on: ubuntu-latest
     env:
-      DOCKER_IMAGE: ghcr.io/${{ github.repository }}/github-action-create-annotations-build
+      DOCKER_IMAGE: docker.pkg.github.com/${{ github.repository }}/github-action-create-annotations-build
       DOCKER_TAG: ${{ github.sha }}
     steps:
     - name: Check out the repo
       uses: actions/checkout@v2
     - name: Login to GitHub Packages Docker Registry
-      run: echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.repository_owner }} --password-stdin
+      run: echo ${{ secrets.GITHUB_TOKEN }} | docker login docker.pkg.github.com -u ${{ github.repository_owner }} --password-stdin
     - name: Pull docker image
       run: docker pull $DOCKER_IMAGE:$DOCKER_TAG
     - name: Copy runnable file from build
