@@ -14,4 +14,4 @@ Create annotations with the structure as reported in https://docs.github.com/en/
         json-file-path: ./lint-results.json
 ```
 
-See other Kib Labs repositories for more examples
+See other Kiba Labs repositories for more examples
