@@ -17,7 +17,7 @@ const generateSummary = (failureCount: number, warningCount: number, noticeCount
   if (noticeCount > 0) {
     messages.push(`${noticeCount} notice(s).`);
   }
-  return messages.join(' ');
+  return messages ? messages.join(' ') : 'All good.';
 };
 
 const generateConclusion = (failureCount: number, warningCount: number, noticeCount: number): string => {

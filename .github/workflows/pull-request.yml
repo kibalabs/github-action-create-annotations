@@ -47,6 +47,8 @@ jobs:
       DOCKER_IMAGE: docker.pkg.github.com/${{ github.repository }}/github-action-create-annotations-build
       DOCKER_TAG: ${{ github.sha }}
     steps:
+    - name: Check out the repo
+      uses: actions/checkout@v2
     - name: Login to GitHub Packages Docker Registry
       run: echo ${{ secrets.GITHUB_TOKEN }} | docker login docker.pkg.github.com -u ${{ github.repository_owner }} --password-stdin
     - name: Pull docker image
