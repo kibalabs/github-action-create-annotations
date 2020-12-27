@@ -12,7 +12,7 @@ inputs:
     description: 'Path to a JSON file which contains a list of annotations.'
     required: true
   check-name:
-    description: 'Set the check name to the check annotations should be attached to (check will be created if it doesn't exist). Default is current running check.'
+    description: 'Set the check name to the check annotations should be attached to (check will be created if it does not exist). Default is current running check.'
     required: false
   fail-on-error:
     description: 'Set if the action should end with an error exit code if there are any failure annotations'
