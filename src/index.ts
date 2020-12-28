@@ -21,11 +21,11 @@ const generateSummary = (failureCount: number, warningCount: number, noticeCount
   return messages ? messages.join(' ') : 'All good.';
 };
 
-const generateConclusion = (failureCount: number, warningCount: number, noticeCount: number): string => {
+const generateConclusion = (failureCount: number, warningCount: number): string => {
   if (failureCount > 0) {
     return 'failure';
   }
-  if (warningCount > 0 || noticeCount > 0) {
+  if (warningCount > 0) {
     return 'neutral';
   }
   return 'success';
@@ -36,7 +36,7 @@ const processAnnotations = async (annotations: IAnnotation[], checkName: string,
   const warningCount = annotations.filter((annotation: IAnnotation): boolean => annotation.annotation_level === ANNOTATION_LEVEL_WARNING).length;
   const noticeCount = annotations.filter((annotation: IAnnotation): boolean => annotation.annotation_level === ANNOTATION_LEVEL_NOTICE).length;
   const summary = generateSummary(failureCount, warningCount, noticeCount);
-  const conclusion = generateConclusion(failureCount, warningCount, noticeCount);
+  const conclusion = generateConclusion(failureCount, warningCount);
   logInfo(`Summary: ${summary}`);
   logInfo(`Conclusion: ${conclusion}`);
 
