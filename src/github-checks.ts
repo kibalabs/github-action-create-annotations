@@ -1,10 +1,10 @@
 import { info as logInfo } from '@actions/core';
-import { GitHub } from '@actions/github';
+import { Octokit } from '@octokit/core';
 
 import { GitHubApiError, GitHubApiUnauthorizedError } from './github-exceptions';
 import { IAnnotation } from './model';
 
-export const createCheck = async (octokit: InstanceType<typeof GitHub>, owner: string, repo: string, name: string, ref: string): Promise<ICheck> => {
+export const createCheck = async (octokit: Octokit, owner: string, repo: string, name: string, ref: string): Promise<ICheck> => {
   logInfo(`Creating GitHub check in '${owner}/${repo}': ${name}}`);
   try {
     const response = await octokit.checks.create({
@@ -26,7 +26,7 @@ export const createCheck = async (octokit: InstanceType<typeof GitHub>, owner: s
   }
 };
 
-export const updateCheck = async (octokit: InstanceType<typeof GitHub>, owner: string, repo: string, checkRunId: number, conclusion: string, title: string, summary: string, annotations: IAnnotation[]): Promise<void> => {
+export const updateCheck = async (octokit: Octokit, owner: string, repo: string, checkRunId: number, conclusion: string, title: string, summary: string, annotations: IAnnotation[]): Promise<void> => {
   logInfo(`Updating GitHub check in '${owner}/${repo}': ${checkRunId}`);
   try {
     await octokit.checks.update({
@@ -51,14 +51,14 @@ export interface ICheck {
   name: string;
 }
 
-export const listChecks = async (octokit: InstanceType<typeof GitHub>, owner: string, repo: string, ref: string): Promise<ICheck[]> => {
+export const listChecks = async (octokit: Octokit, owner: string, repo: string, ref: string): Promise<ICheck[]> => {
   logInfo(`Listing GitHub checks in '${owner}/${repo}:${ref}'`);
   try {
     const response = await octokit.checks.listForRef({ owner, repo, ref });
     return response.data.check_runs.map((checkRun: Record<string, unknown>): ICheck => {
       return {
-        id: checkRun.id,
-        name: checkRun.name,
+        id: checkRun.id as number,
+        name: checkRun.name as string,
       };
     });
   } catch (err) {

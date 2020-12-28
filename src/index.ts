@@ -1,7 +1,8 @@
 import { promises as fs } from 'fs';
 
 import { ExitCode, getInput, info as logInfo, setFailed } from '@actions/core';
-import { getOctokit, GitHub, context as githubContext } from '@actions/github';
+import { getOctokit, context as githubContext } from '@actions/github';
+import { Octokit } from '@octokit/core';
 
 import { createCheck, ICheck, listChecks, updateCheck } from './github-checks';
 import { ANNOTATION_LEVEL_FAILURE, ANNOTATION_LEVEL_NOTICE, ANNOTATION_LEVEL_WARNING, IAnnotation, IResult } from './model';
@@ -30,7 +31,7 @@ const generateConclusion = (failureCount: number, warningCount: number, noticeCo
   return 'success';
 };
 
-const processAnnotations = async (annotations: IAnnotation[], checkName: string, octokit: GitHub): Promise<IResult> => {
+const processAnnotations = async (annotations: IAnnotation[], checkName: string, octokit: Octokit): Promise<IResult> => {
   const failureCount = annotations.filter((annotation: IAnnotation): boolean => annotation.annotation_level === ANNOTATION_LEVEL_FAILURE).length;
   const warningCount = annotations.filter((annotation: IAnnotation): boolean => annotation.annotation_level === ANNOTATION_LEVEL_WARNING).length;
   const noticeCount = annotations.filter((annotation: IAnnotation): boolean => annotation.annotation_level === ANNOTATION_LEVEL_NOTICE).length;
@@ -46,7 +47,6 @@ const processAnnotations = async (annotations: IAnnotation[], checkName: string,
     currentCheck = await createCheck(octokit, githubContext.repo.owner, githubContext.repo.repo, checkName, ref);
   }
 
-  const a = 1;
   const updatePromises = [];
   const chunkSize = 50;
   for (let index = 0; index < annotations.length; index += chunkSize) {
