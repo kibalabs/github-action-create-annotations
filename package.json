@@ -13,7 +13,8 @@
     "build": "build-module --webpack-config-modifier ./webpack-config-modifier.js",
     "clean": "rm -rf ./node_modules ./package-lock.json ./dist",
     "lint": "lint --config-modifier ./eslintrc-modifier.js",
-    "lint-fix": "lint --fix --config-modifier ./eslintrc-modifier.js"
+    "lint-fix": "lint --fix --config-modifier ./eslintrc-modifier.js",
+    "type-check": "type-check"
   },
   "files": [
     "dist/*"
