@@ -46,15 +46,16 @@ const processAnnotations = async (annotations: IAnnotation[], checkName: string,
     currentCheck = await createCheck(octokit, githubContext.repo.owner, githubContext.repo.repo, checkName, ref);
   }
 
+  const a = 1;
   const updatePromises = [];
   const chunkSize = 50;
   for (let index = 0; index < annotations.length; index += chunkSize) {
     const annotationsBatch = annotations.slice(index, index + chunkSize);
-    updatePromises.push(updateCheck(octokit, githubContext.repo.owner, githubContext.repo.repo, currentCheck.id, conclusion, currentCheck.name, summary, annotationsBatch));
+    updatePromises.push(updateCheck(octokit, githubContext.repo.owner, githubContext.repo.repo, currentCheck.id, conclusion, summary, summary, annotationsBatch));
   }
   // TODO(krishan711): the above won't run if there are no annotations, figure out how to clean this up.
   if (annotations.length === 0) {
-    updatePromises.push(updateCheck(octokit, githubContext.repo.owner, githubContext.repo.repo, currentCheck.id, conclusion, currentCheck.name, summary, []));
+    updatePromises.push(updateCheck(octokit, githubContext.repo.owner, githubContext.repo.repo, currentCheck.id, conclusion, summary, summary, []));
   }
   await Promise.all(updatePromises);
   return { failureCount, warningCount, noticeCount };
