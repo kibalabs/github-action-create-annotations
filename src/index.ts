@@ -37,8 +37,8 @@ const processAnnotations = async (octokit: Octokit, annotations: IAnnotation[], 
     return {
       ...annotation,
       path: path.join(pathPrefix, annotation.path),
-    }
-  })
+    };
+  });
   const failureCount = cleanedAnnotations.filter((annotation: IAnnotation): boolean => annotation.annotation_level === ANNOTATION_LEVEL_FAILURE).length;
   const warningCount = cleanedAnnotations.filter((annotation: IAnnotation): boolean => annotation.annotation_level === ANNOTATION_LEVEL_WARNING).length;
   const noticeCount = cleanedAnnotations.filter((annotation: IAnnotation): boolean => annotation.annotation_level === ANNOTATION_LEVEL_NOTICE).length;
