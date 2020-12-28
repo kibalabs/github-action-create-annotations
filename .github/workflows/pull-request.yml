@@ -17,13 +17,24 @@ jobs:
       run: docker build --tag $DOCKER_IMAGE .
     - name: Run linting
       run: |
-        docker run --name lint $DOCKER_IMAGE npm run lint -- --output-file lint-results.json --output-file-format annotations
-        docker cp lint:/app/lint-results.json ./lint-results.json
+        docker run --name lint $DOCKER_IMAGE npm run lint -- --output-file linting-results.json --output-file-format annotations
+        docker cp lint:/app/linting-results.json ./linting-results.json
     - name: Upload linting results
       uses: ./
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
-        json-file-path: ./lint-results.json
+        json-file-path: ./linting-results.json
+        check-name: lint-package
+        fail-on-error: false
+    - name: Run typing
+      run: |
+        docker run --name lint $DOCKER_IMAGE npm run lint -- --output-file typing-results.json --output-file-format annotations
+        docker cp lint:/app/typing-results.json ./typing-results.json
+    - name: Upload typing results
+      uses: ./
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        json-file-path: ./typing-results.json
         check-name: lint-package
         fail-on-error: false
     - name: Copy runnable file from build
