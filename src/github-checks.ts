@@ -4,13 +4,13 @@ import { GitHub } from '@actions/github';
 import { GitHubApiError, GitHubApiUnauthorizedError } from './github-exceptions';
 import { IAnnotation } from './model';
 
-export const createCheck = async (octokit: InstanceType<typeof GitHub>, owner: string, repo: string, title: string, ref: string): Promise<ICheck> => {
-  logInfo(`Creating GitHub check in '${owner}/${repo}': ${title}}`);
+export const createCheck = async (octokit: InstanceType<typeof GitHub>, owner: string, repo: string, name: string, ref: string): Promise<ICheck> => {
+  logInfo(`Creating GitHub check in '${owner}/${repo}': ${name}}`);
   try {
     const response = await octokit.checks.create({
       owner,
       repo,
-      name: title,
+      name,
       head_sha: ref,
       status: 'in_progress',
     });
@@ -27,7 +27,7 @@ export const createCheck = async (octokit: InstanceType<typeof GitHub>, owner: s
 };
 
 export const updateCheck = async (octokit: InstanceType<typeof GitHub>, owner: string, repo: string, checkRunId: number, conclusion: string, title: string, summary: string, annotations: IAnnotation[]): Promise<void> => {
-  logInfo(`Updating GitHub check in '${owner}/${repo}': ${title}`);
+  logInfo(`Updating GitHub check in '${owner}/${repo}': ${checkRunId}`);
   try {
     await octokit.checks.update({
       owner,

@@ -15,6 +15,12 @@ jobs:
       uses: actions/checkout@v2
     - name: Build docker image
       run: docker build --tag $DOCKER_IMAGE .
+    - name: Copy runnable file from build
+      run: |
+        docker create --name container $DOCKER_IMAGE
+        docker cp container:/app/runnable/index.js ./runnable.js
+    - name: Check the runnable
+      run: cmp ./runnable/index.js ./runnable.js
     - name: Run linting
       run: |
         docker run --name linting $DOCKER_IMAGE npm run lint -- --output-file linting-results.json --output-file-format annotations
@@ -37,12 +43,6 @@ jobs:
         json-file-path: ./typing-results.json
         check-name: type-package
         fail-on-error: false
-    - name: Copy runnable file from build
-      run: |
-        docker create --name container $DOCKER_IMAGE
-        docker cp container:/app/runnable/index.js ./runnable.js
-    - name: Check the runnable
-      run: cmp ./runnable/index.js ./runnable.js
   run-action:
     runs-on: ubuntu-latest
     steps:
