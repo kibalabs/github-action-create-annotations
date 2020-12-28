@@ -18,6 +18,9 @@ inputs:
     description: 'Set if the action should end with an error exit code if there are any failure annotations'
     required: false
     default: true
+  path-prefix:
+    description: 'Set if all the paths in the annotations should be prefixed with a parent path'
+    required: false
 runs:
   using: 'node12'
   main: 'runnable/index.js'
