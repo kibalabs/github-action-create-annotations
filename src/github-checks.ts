@@ -14,7 +14,6 @@ export interface ICheck {
 }
 
 export interface ICheckOutput {
-  conclusion: CheckConclusion;
   title: string;
   summary: string;
   annotations: IAnnotation[];
@@ -37,7 +36,7 @@ export const findCheck = async (octokit: Octokit, owner: string, repo: string, r
   }
 };
 
-export const createCheck = async (octokit: Octokit, owner: string, repo: string, name: string, ref: string, output: ICheckOutput): Promise<ICheck> => {
+export const createCheck = async (octokit: Octokit, owner: string, repo: string, name: string, ref: string, conclusion: CheckConclusion, output: ICheckOutput): Promise<ICheck> => {
   logInfo(`Creating GitHub check in '${owner}/${repo}': ${name}`);
   try {
     const response = await octokit.rest.checks.create({
@@ -46,7 +45,7 @@ export const createCheck = async (octokit: Octokit, owner: string, repo: string,
       name,
       head_sha: ref,
       status: 'completed',
-      conclusion: output.conclusion,
+      conclusion,
       output: {
         title: output.title,
         summary: output.summary,
@@ -62,14 +61,13 @@ export const createCheck = async (octokit: Octokit, owner: string, repo: string,
   }
 };
 
-const updateCheckWithRetries = async (octokit: Octokit, owner: string, repo: string, checkRunId: number, output: ICheckOutput, retryDelaysMs: number[]): Promise<void> => {
+const updateCheckWithRetries = async (octokit: Octokit, owner: string, repo: string, checkRunId: number, conclusion: CheckConclusion | null, output: ICheckOutput, retryDelaysMs: number[]): Promise<void> => {
   try {
     await octokit.rest.checks.update({
       owner,
       repo,
       check_run_id: checkRunId,
-      status: 'completed',
-      conclusion: output.conclusion,
+      ...(conclusion ? { status: 'completed', conclusion } : {}),
       output: {
         title: output.title,
         summary: output.summary,
@@ -81,14 +79,14 @@ const updateCheckWithRetries = async (octokit: Octokit, owner: string, repo: str
     if (getErrorStatus(error) === 404 && retryDelaysMs.length > 0) {
       logInfo(`GitHub check ${checkRunId} not found yet, retrying in ${retryDelaysMs[0]}ms`);
       await sleep(retryDelaysMs[0]);
-      await updateCheckWithRetries(octokit, owner, repo, checkRunId, output, retryDelaysMs.slice(1));
+      await updateCheckWithRetries(octokit, owner, repo, checkRunId, conclusion, output, retryDelaysMs.slice(1));
       return;
     }
     throw new GitHubApiError(`Unable to update check '${owner}/${repo}' check_run_id: ${checkRunId}. Details: ${error}`);
   }
 };
 
-export const updateCheck = async (octokit: Octokit, owner: string, repo: string, checkRunId: number, output: ICheckOutput): Promise<void> => {
+export const updateCheck = async (octokit: Octokit, owner: string, repo: string, checkRunId: number, conclusion: CheckConclusion | null, output: ICheckOutput): Promise<void> => {
   logInfo(`Updating GitHub check in '${owner}/${repo}': ${checkRunId}`);
-  await updateCheckWithRetries(octokit, owner, repo, checkRunId, output, UPDATE_RETRY_DELAYS_MS);
+  await updateCheckWithRetries(octokit, owner, repo, checkRunId, conclusion, output, UPDATE_RETRY_DELAYS_MS);
 };

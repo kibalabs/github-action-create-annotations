@@ -33,7 +33,7 @@ const generateConclusion = (failureCount: number, warningCount: number): CheckCo
   return 'success';
 };
 
-const processAnnotations = async (octokit: Octokit, annotations: IAnnotation[], checkName: string, pathPrefix: string): Promise<IResult> => {
+const processAnnotations = async (octokit: Octokit, annotations: IAnnotation[], checkName: string, isJobCheckName: boolean, pathPrefix: string): Promise<IResult> => {
   const cleanedAnnotations = annotations.map((annotation: IAnnotation): IAnnotation => {
     return {
       ...annotation,
@@ -53,22 +53,24 @@ const processAnnotations = async (octokit: Octokit, annotations: IAnnotation[], 
     annotationBatches.push(cleanedAnnotations.slice(index, index + MAX_ANNOTATIONS_PER_REQUEST));
   }
   const [firstAnnotations = [], ...remainingAnnotationBatches] = annotationBatches;
-  const buildOutput = (batchAnnotations: IAnnotation[]): ICheckOutput => ({ conclusion, title: summary, summary: '', annotations: batchAnnotations });
+  const buildOutput = (batchAnnotations: IAnnotation[]): ICheckOutput => ({ title: summary, summary: '', annotations: batchAnnotations });
 
   const { owner, repo } = githubContext.repo;
   const ref = githubContext.payload.pull_request ? githubContext.payload.pull_request.head.sha : githubContext.sha;
   const existingCheck = await findCheck(octokit, owner, repo, ref, checkName);
+  // NOTE(krishan711): GitHub only lets Actions itself set the status and conclusion of a job's own check run, so that check only gets the annotations
+  const updateConclusion = existingCheck && isJobCheckName ? null : conclusion;
   let checkRunId: number;
   if (existingCheck) {
     checkRunId = existingCheck.id;
-    await updateCheck(octokit, owner, repo, checkRunId, buildOutput(firstAnnotations));
+    await updateCheck(octokit, owner, repo, checkRunId, updateConclusion, buildOutput(firstAnnotations));
   } else {
-    checkRunId = (await createCheck(octokit, owner, repo, checkName, ref, buildOutput(firstAnnotations))).id;
+    checkRunId = (await createCheck(octokit, owner, repo, checkName, ref, conclusion, buildOutput(firstAnnotations))).id;
   }
   // NOTE(krishan711): each update appends its annotations to the check, so batches go one after another
   await remainingAnnotationBatches.reduce(async (previousUpdate: Promise<void>, batchAnnotations: IAnnotation[]): Promise<void> => {
     await previousUpdate;
-    await updateCheck(octokit, owner, repo, checkRunId, buildOutput(batchAnnotations));
+    await updateCheck(octokit, owner, repo, checkRunId, updateConclusion, buildOutput(batchAnnotations));
   }, Promise.resolve());
   return { failureCount, warningCount, noticeCount };
 };
@@ -78,12 +80,12 @@ const run = async (): Promise<void> => {
     const githubToken = getInput('github-token', { required: true });
     const jsonFilePath = getInput('json-file-path', { required: true });
     const failOnError = /^(true|1)$/.test(getInput('fail-on-error', { required: false }));
-    const checkName = getInput('check-name', { required: false }) || githubContext.job;
+    const checkNameInput = getInput('check-name', { required: false });
     const pathPrefix = getInput('path-prefix', { required: false }) || '';
     const fileContent = await fs.readFile(jsonFilePath, 'utf8');
     const annotations = JSON.parse(fileContent) as IAnnotation[];
     const octokit = getOctokit(githubToken);
-    const result = await processAnnotations(octokit, annotations, checkName, pathPrefix);
+    const result = await processAnnotations(octokit, annotations, checkNameInput || githubContext.job, !checkNameInput, pathPrefix);
     if (failOnError && result.failureCount > 0) {
       process.exitCode = ExitCode.Failure;
     }

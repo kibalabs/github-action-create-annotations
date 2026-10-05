@@ -18,6 +18,8 @@ If you are using this within a job that should report the results directly, you 
         json-file-path: ./lint-results.json
 ```
 
+The annotations are added to the job's own check. GitHub only lets Actions set that check's result, so use `fail-on-error` (default `true`) to fail the job when there are failure annotations.
+
 If you'd like to use this within a longer job and report the results as a separate check, use this:
 
 ```
