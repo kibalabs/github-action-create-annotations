@@ -1,12 +1,11 @@
-FROM node:12.16.1-stretch as build
+FROM node:24.13.0 AS build
 
 WORKDIR /app
+COPY makefile .
 
-# Install dependecies
-COPY package.json package.json
-COPY package-lock.json package-lock.json
-RUN npm ci
+COPY package.json .
+COPY package-lock.json .
+RUN make install
 
 COPY . .
-
-RUN npm run build
+RUN make build

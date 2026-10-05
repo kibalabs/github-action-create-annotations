@@ -1,52 +1,57 @@
 name: Build
 on:
   pull_request:
-    branches: [ main ]
+    branches: [main]
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}-pull-request
+  cancel-in-progress: true
 jobs:
   build-package:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: .
+    permissions:
+      contents: read
+      checks: write
     env:
       DOCKER_IMAGE: github-action-create-annotations-build
     steps:
-    - name: Check out the repo
-      uses: actions/checkout@v2
-    - name: Build docker image
-      run: docker build --tag $DOCKER_IMAGE .
-    - name: Copy runnable file from build
-      run: |
-        docker create --name container $DOCKER_IMAGE
-        docker cp container:/app/runnable/index.js ./runnable.js
-    - name: Check the runnable
-      run: cmp ./runnable/index.js ./runnable.js
-    - name: Run linting
-      run: |
-        docker run --name linting $DOCKER_IMAGE npm run lint -- --output-file linting-results.json --output-file-format annotations
-        docker cp linting:/app/linting-results.json ./linting-results.json
-    - name: Upload linting results
-      uses: ./
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        json-file-path: ./linting-results.json
-        check-name: lint-package
-        fail-on-error: false
-    - name: Run typing
-      run: |
-        docker run --name typing $DOCKER_IMAGE npm run type-check -- --output-file typing-results.json --output-file-format annotations
-        docker cp typing:/app/typing-results.json ./typing-results.json
-    - name: Upload typing results
-      uses: ./
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        json-file-path: ./typing-results.json
-        check-name: type-package
-        fail-on-error: false
+      - name: Check out the repo
+        uses: actions/checkout@v7
+      - name: Build docker image
+        run: docker build --tag $DOCKER_IMAGE .
+      - name: Check the runnable is up to date
+        run: |
+          docker create --name container $DOCKER_IMAGE
+          docker cp container:/app/runnable/index.js ./runnable.js
+          cmp ./runnable/index.js ./runnable.js
+      - name: Run lint-check
+        run: |
+          docker run --name lint-check $DOCKER_IMAGE make lint-check-ci
+          docker cp lint-check:/app/lint-check-results.json ./lint-check-results.json
+      - name: Upload lint results
+        uses: ./
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          json-file-path: ./lint-check-results.json
+          check-name: lint-check
+          fail-on-error: false
+      - name: Run type-check
+        run: |
+          docker run --name type-check $DOCKER_IMAGE make type-check-ci
+          docker cp type-check:/app/type-check-results.json ./type-check-results.json
+      - name: Upload type-check results
+        uses: ./
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          json-file-path: ./type-check-results.json
+          check-name: type-check
+          fail-on-error: false
   run-action:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      checks: write
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v7
       - uses: ./
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}

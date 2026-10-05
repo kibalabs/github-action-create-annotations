@@ -1,5 +1,3 @@
-/* eslint-disable max-classes-per-file */
-
 export class GitHubApiUnauthorizedError extends Error {
   constructor(message: string) {
     super(message);

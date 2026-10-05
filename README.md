@@ -2,7 +2,9 @@
 
 Use this action to create annotations during a GitHub Workflow action.
 
-Create annotations with the structure as reported in https://docs.github.com/en/free-pro-team@latest/rest/reference/checks#annotations-items
+Create annotations with the structure as reported in https://docs.github.com/en/rest/checks/runs#create-a-check-run (`output.annotations`).
+
+The job needs `checks: write` permission for the token it is given.
 
 ## Example
 
@@ -29,3 +31,7 @@ If you'd like to use this within a longer job and report the results as a separa
 ```
 
 See other Kiba Labs repositories for more examples.
+
+## Development
+
+Build with `make build`, which bundles `src/` into `runnable/index.js`. GitHub runs that file directly, so commit it with every source change.

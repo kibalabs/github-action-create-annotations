@@ -22,5 +22,5 @@ inputs:
     description: 'Set if all the paths in the annotations should be prefixed with a parent path'
     required: false
 runs:
-  using: 'node12'
+  using: 'node24'
   main: 'runnable/index.js'
