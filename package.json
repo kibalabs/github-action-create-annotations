@@ -1,7 +1,7 @@
 {
   "name": "@kibalabs/github-action-create-annotations",
-  "version": "0.2.0",
-  "description": "GitHub Action",
+  "version": "0.3.0",
+  "description": "GitHub Action to create check annotations from a JSON file",
   "license": "MIT",
   "private": true,
   "repository": {
@@ -9,26 +9,13 @@
     "url": "https://github.com/kibalabs/github-action-create-annotations.git"
   },
   "bugs": "https://github.com/kibalabs/github-action-create-annotations/issues",
-  "scripts": {
-    "build": "build-module --webpack-config-modifier ./webpack-config-modifier.js",
-    "clean": "rm -rf ./node_modules ./package-lock.json ./dist",
-    "lint": "lint --config-modifier ./eslintrc-modifier.js",
-    "lint-fix": "lint --fix --config-modifier ./eslintrc-modifier.js",
-    "type-check": "type-check"
-  },
-  "files": [
-    "dist/*"
-  ],
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "type": "module",
   "dependencies": {
-    "@actions/core": "^1.2.6",
-    "@actions/github": "^4.0.0",
-    "@octokit/core": "^3.2.4"
+    "@actions/core": "^3.0.1",
+    "@actions/github": "^9.1.1"
   },
   "devDependencies": {
-    "@kibalabs/build": "0.6.3-next.7",
-    "filemanager-webpack-plugin": "^3.0.0",
-    "js-yaml": "^3.14.0"
+    "@kibalabs/build": "0.14.2-next.5",
+    "@types/node": "^24.0.0"
   }
 }
