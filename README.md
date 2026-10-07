@@ -12,7 +12,7 @@ If you are using this within a job that should report the results directly, you 
 
 ```
     - name: Upload linting results
-      uses: kibalabs/github-action-create-annotations@main
+      uses: kibalabs/github-action-create-annotations@v1
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         json-file-path: ./lint-results.json
@@ -24,7 +24,7 @@ If you'd like to use this within a longer job and report the results as a separa
 
 ```
     - name: Upload typing results
-      uses: kibalabs/github-action-create-annotations@main
+      uses: kibalabs/github-action-create-annotations@v1
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         json-file-path: ./typing-results.json
@@ -37,3 +37,5 @@ See other Kiba Labs repositories for more examples.
 ## Development
 
 Build with `make build`, which bundles `src/` into `runnable/index.js`. GitHub runs that file directly, so commit it with every source change.
+
+To release, push a `vX.Y.Z` tag. The release workflow publishes the release and moves the `vX` tag to it, so `@v1` always points at the latest 1.x release.
