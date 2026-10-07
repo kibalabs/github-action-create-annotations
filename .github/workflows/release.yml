@@ -1,7 +1,7 @@
 name: Release
 on:
   push:
-    tags: ['v*']
+    tags: ['v*.*.*']
 jobs:
   create-release:
     runs-on: ubuntu-latest
@@ -14,3 +14,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: gh release create ${{ github.ref_name }} --title "Release ${{ github.ref_name }}" --generate-notes
+      - name: Move the major version tag
+        run: |
+          majorTag="${GITHUB_REF_NAME%%.*}"
+          git tag --force "$majorTag"
+          git push --force origin "$majorTag"

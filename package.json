@@ -1,6 +1,6 @@
 {
   "name": "@kibalabs/github-action-create-annotations",
-  "version": "0.3.0",
+  "version": "1.0.0",
   "description": "GitHub Action to create check annotations from a JSON file",
   "license": "MIT",
   "private": true,
