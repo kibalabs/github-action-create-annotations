@@ -38,4 +38,4 @@ See other Kiba Labs repositories for more examples.
 
 Build with `make build`, which bundles `src/` into `runnable/index.js`. GitHub runs that file directly, so commit it with every source change.
 
-To release, push a `vX.Y.Z` tag. The release workflow publishes the release and moves the `vX` tag to it, so `@v1` always points at the latest 1.x release.
+To release, bump `version` in `package.json` in a PR, then run the Release workflow on `main` (Actions → Release → Run workflow). It tags `vX.Y.Z`, publishes the release and moves the `vX` tag to it, so `@v1` always points at the latest 1.x release. Versions with a pre-release suffix (e.g. `1.1.0-rc1`) are published as pre-releases and don't move `vX`. Only the release workflow can push version tags.

@@ -1,21 +1,55 @@
 name: Release
 on:
-  push:
-    tags: ['v*.*.*']
+  workflow_dispatch:
+concurrency:
+  group: release
 jobs:
   create-release:
     runs-on: ubuntu-latest
+    # NOTE(krishan711): the release environment only allows main and holds the deploy key, which is the only thing allowed past the tag ruleset
+    environment: release
     permissions:
       contents: write
     steps:
       - name: Check out the repo
         uses: actions/checkout@v7
-      - name: Create Release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh release create ${{ github.ref_name }} --title "Release ${{ github.ref_name }}" --generate-notes
-      - name: Move the major version tag
+        with:
+          ssh-key: ${{ secrets.RELEASE_DEPLOY_KEY }}
+      - name: Push the version tag
+        id: version
         run: |
-          majorTag="${GITHUB_REF_NAME%%.*}"
+          version="v$(jq -r .version package.json)"
+          if [[ ! "$version" =~ ^v[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.-]+)?$ ]]; then
+            echo "::error::package.json version $version is not semver"
+            exit 1
+          fi
+          existingSha="$(git ls-remote origin "refs/tags/$version" | cut -f1)"
+          if [[ -n "$existingSha" && "$existingSha" != "$GITHUB_SHA" ]]; then
+            echo "::error::$version already exists on $existingSha, bump the version in package.json"
+            exit 1
+          fi
+          if [[ -z "$existingSha" ]]; then
+            git tag "$version"
+            git push origin "refs/tags/$version"
+          fi
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+      - name: Create the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          if gh release view "$VERSION" >/dev/null 2>&1; then
+            echo "$VERSION is already released"
+          elif [[ "$VERSION" == *-* ]]; then
+            gh release create "$VERSION" --verify-tag --title "Release $VERSION" --generate-notes --prerelease
+          else
+            gh release create "$VERSION" --verify-tag --title "Release $VERSION" --generate-notes
+          fi
+      - name: Move the major version tag
+        if: ${{ !contains(steps.version.outputs.version, '-') }}
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          majorTag="${VERSION%%.*}"
           git tag --force "$majorTag"
-          git push --force origin "$majorTag"
+          git push --force origin "refs/tags/$majorTag"
